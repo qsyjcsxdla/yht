@@ -1,0 +1,32 @@
+{
+"js": {
+"main": [
+"./js/app/**/*.js"
+],
+"coolie-config.js": "./js/coolie-config.js",
+"dest": "./statics/js/",
+"chunk": []
+},
+"css": {
+"dest": "./statics/css/",
+"minify": {
+"compatibility": "ie7"
+}
+},
+"html": {
+"src": [
+"./**/*.html"
+],
+"minify": true
+},
+"resource": {
+"dest": "./statics/res/",
+"minify": true
+},
+"copy": [],
+"dest": {
+"dirname": "../../xinshoufuli/",
+"host": "/xyc/xinshoufuliHtml/",
+"versionLength": 32
+}
+}

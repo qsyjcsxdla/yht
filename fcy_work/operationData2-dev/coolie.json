@@ -1,0 +1,32 @@
+{
+  "js": {
+    "main": [
+      "./statics/js/app/**/*.js"
+    ],
+    "coolie-config.js": "./statics/js/coolie-config.js",
+    "dest": "./statics/js/",
+    "chunk": []
+  },
+  "css": {
+    "dest": "./statics/css/",
+    "minify": {
+      "compatibility": "ie7"
+    }
+  },
+  "html": {
+    "src": [
+      "./views/**/*.html"
+    ],
+    "minify": true
+  },
+  "resource": {
+    "dest": "./statics/img/",
+    "minify": true
+  },
+  "copy": [],
+  "dest": {
+    "dirname": "../../operationalData-pro/",
+    "host": "/xyc/operationalData-pro/",
+    "versionLength": 32
+  }
+}
