@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	<div id="app">
+		<span v-text="name"></span>
+
+		<div v-html="name"></div>
+	</div>
+</body>
+
+<script src="vue1026.js"></script>
+
+<script>
+new Vue({
+	el :'#app',
+	data:{
+		name:'<h1>黑马程序员</h1>'
+	}
+});
+</script>
+
+</html>

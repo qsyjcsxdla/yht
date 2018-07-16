@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue221.js"></script>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<!-- vue1.0 的写法 -->
+			 <!--<li v-for="(index,item) in list" track-by="$index">{{index}}-{{item}}</li>-->
+  			<!-- vue 2.0的写法 -->
+			<li v-for="(item,index) in list" :key="index">{{index}}-{{item}}</li>
+
+			<!-- <li v-for ="(key,item) in user">{{key}}-{{item}}</li> -->
+	
+		</ul>
+	</div>
+</body>
+
+<script>
+new Vue({
+	el:'#app',
+	data:{
+		list:[1,2,3,4,4,5,5],
+		user:{uname:'itcast',age:10}
+	}
+});
+</script>
+</html>

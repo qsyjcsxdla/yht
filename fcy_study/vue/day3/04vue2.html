@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue221.js"></script>
+	<script src="vue-router231.js"></script>
+</head>
+<body>
+	<div id="app">
+		<router-link to="/account/register">注册</router-link>
+		<router-link to="/account/login">登录</router-link>
+
+		<router-view></router-view>
+	</div>
+</body>
+<script>
+// 1.0 准备组件
+var App = Vue.extend({});
+
+var account = Vue.extend({
+	template:'<div><h1>账号组件</h1><router-view></router-view></div>'
+});
+
+var login = Vue.extend({
+	template:'<h1>登录</h1>'
+});
+
+var register = Vue.extend({
+	template:'<h1>注册</h1>'
+});
+
+// 2.0 实例化路由对象
+var router = new VueRouter({
+	routes:[
+		{
+			path:'/account',
+			component:account,
+			children:[
+				{
+					path:'login',
+					component:login
+				},
+				{
+					path:'register',
+					component:register
+				}
+			]
+		}
+	]
+});
+
+// 3.0 使路由生效
+new Vue({
+	el :'#app',
+	router:router
+})
+
+</script>
+</html>

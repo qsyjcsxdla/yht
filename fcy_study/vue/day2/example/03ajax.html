@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #app {
+        width: 800px;
+        margin: 20px auto;
+    }
+    
+    #tb {
+        width: 800px;
+        border-collapse: collapse;
+        margin: 20px auto;
+    }
+    
+    #tb th {
+        background-color: #0094ff;
+        color: white;
+        font-size: 16px;
+        padding: 5px;
+        text-align: center;
+        border: 1px solid black;
+    }
+    
+    #tb td {
+        padding: 5px;
+        text-align: center;
+        border: 1px solid black;
+    }
+    </style>
+    <script src="../vue1026.js"></script>
+    <script src="../vue-resource121.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="pname">
+        <button @click="adddata">添加数据</button>
+      
+        <table id="tb">
+            <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="item in list">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.ctime}}</td>
+                <td>
+                <a href="javascript:void(0)" @click="deldata(item.id)">删除</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script>
+// Vue的生命周期
+
+ new Vue({
+    el :'#app',
+    data:{
+        pname:'',
+        list:[]
+    },
+    // Vue对象实例创建成功以后就会自动调用这个方法
+    created:function(){
+        this.getlist();
+    },
+    methods:{
+        // 删除数据
+        deldata:function(id){
+            this.$http.get('http://vueapi.ittun.com/api/delproduct/'+id)
+            .then(function(response){
+                if(response.body.status !=0){
+                    alert(response.body.message);
+                    return;
+                }
+
+                // 刷新列表
+                this.getlist();
+            });
+        },
+        adddata:function(){
+            // 实现将数据post到数据添加接口：vueapi.ittun.com/api/addproduct
+            // 1.0 获取用户填写的文本框的值只需要通过this.pname即可
+            // 2.0 调用ajax的post方法将数据post给服务器
+            var url ='http://vueapi.ittun.com/api/addproduct';
+            var postData ={name:this.pname};
+            var options = {emulateJSON:true};
+            this.$http.post(url,postData,options).then(function(response){
+                if(response.body.status !=0) {
+                    alert(response.body.message);
+                    return;
+                }
+
+                this.pname ='';
+                
+                // 3.0 直接将列表数据重新加载一次
+                this.getlist();
+
+            });
+        },
+        getlist:function(){
+            // 请求服务器的api获取到品牌的数据列表
+            this.$http.get('http://vueapi.ittun.com/api/getprodlist')
+            .then(function(response){
+                // 1.0 处理服务器异常信息提示
+                if(response.body.status != 0){
+                    alert(response.body.message);
+                    return;
+                }
+
+                // 2.0 处理正常的数据逻辑
+               this.list =  response.body.message;
+               console.log(this.list);
+            });
+        }
+    }
+ });
+</script>
+
+</html>

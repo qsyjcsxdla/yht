@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	 <style>
+		.show-transition{
+			transition:all 0.4s ease;
+			padding-left: 10px;
+		}
+
+		.show-enter,.show-leave{
+			padding-left: 100px;
+		}
+		
+	 </style>
+
+	<script src="../vue1026.js"></script>
+	<!-- 使用动画的步骤总结：
+1、在需要进行动画控制的元素上增加 transition = "自定义"
+2、利用三个css控制
+	 -->
+
+</head>
+<body>
+	<div id="app">
+	<button @click="toggle">显示和隐藏数据</button><br>
+		<span v-show="isshow" transition="show">hello vuejs</span>
+	</div>
+</body>
+<script>
+
+new Vue({
+	el :'#app',
+	data:{
+		isshow:false
+	},
+	methods:{
+		toggle:function(){
+			this.isshow = !this.isshow;
+		}
+	}
+});
+</script>
+</html>

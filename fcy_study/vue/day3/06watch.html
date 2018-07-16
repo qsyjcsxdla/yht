@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue221.js"></script>
+	<script src="vue-router231.js"></script>
+</head>
+<body>
+	<div id="app">
+		<router-link to="/login">登录</router-link>
+		<router-link to="/register/itcast">注册</router-link>
+
+		<router-view></router-view>
+	</div>
+</body>
+<script>
+// 1.0 准备组件
+var App = Vue.extend({});
+
+var login = Vue.extend({
+	template:'<div><h1>登录</h1></div>'
+});
+
+var register = Vue.extend({
+	template:'<div><h1>注册{{name}}</h1></div>',
+	data:function(){
+		return {
+			name:''
+		}
+	},
+	created:function(){
+		this.name = this.$route.params.name1;
+	}
+});
+
+// 2.0 实例化路由规则对象
+var router = new VueRouter({
+	routes:[
+		{path:'/',redirect:'/login'},
+		{path:'/login',component:login},
+		{path:'/register/:name1',component:register}
+	]
+});
+
+// 3.0 开启路由对象
+new Vue({
+	el :'#app',
+	router : router, //开启路由对象
+	watch:{
+		'$route':function(newroute,oldroute){
+			// console.log(newroute,oldroute);
+			// 将来就可以在这个函数中获取到当前的路由规则字符串是谁了
+			// 那么就可以针对一些特定的页面做一些特定的处理
+		}
+	}
+});
+
+</script>
+</html>

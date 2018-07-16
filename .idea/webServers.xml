@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="66558c7b-8250-4729-a357-9bc80222d5f5" name="yht" url="http://192.168.10.89:8080/yht">
+        <fileTransfer port="0" mountedRoot="D:\tools\apache-tomcat-7.0.85\webapps\yht" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

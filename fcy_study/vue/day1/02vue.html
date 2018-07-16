@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	<div id="app">	
+	{{ name + '1'}} 
+	{{ name == 'wo'? 'true': 'false' }}
+	{{ if1(name) }}
+	</div>
+</body>
+<script src="vue1026.js"></script>
+<script>
+var vm = new Vue({
+	el:'#app', 
+	data: {
+		name:'黑马程序员'
+	},
+	methods:{
+		'if1':function(str){
+			return str == 'wo'
+		}
+	}
+});
+</script>
+</html>

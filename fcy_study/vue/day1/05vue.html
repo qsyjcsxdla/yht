@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	[v-cloak]{
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<span v-cloak>{{name}}</span>
+	</div>
+</body>
+
+<script src="vue1026.js"></script>
+<script>
+new Vue({
+	el:'#app',
+	data:{
+		name:'黑马程序员'
+	}
+});
+</script>
+
+</html>

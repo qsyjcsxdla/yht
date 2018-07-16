@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.show{
+		transition:all 0.4s ease;
+	}
+	</style>
+	<script src='../vue1026.js'></script>
+</head>
+<body>
+	<div id="app">
+	<button @click="toggle">显示和隐藏数据</button><br>
+	<div v-if="isshow" transition="show" class="show">hello vuejs</div>
+	</div>
+</body>
+<script>
+// 1.0 定义动画的钩子函数
+Vue.transition('show',{
+	// 1.0 这里主要是通过js定义当前实现动画的初始位置
+	beforeEnter:function(el){
+		el.style.transform = "translate(100px,0)";
+	},
+	// 2.0 通过js定义的是动画的结束位置
+	enter:function(el,done){
+		// 2.0.1 设置一下刷新状态
+		el.offsetWidth;
+		//2.0.2 设置动画的结束位置
+		el.style.transform = "translate(0px,0)";
+		// 2.0.3 手动调用一下 done方法,由这个方法去决定动画是否结束了，
+		// 否则动画的消失会有延迟
+		done();
+
+	},
+	// 3.0 动画的状态复原设置
+	afterEnter:function(el){
+		// 这里涉及到跨作用于操作变量是不可以的
+		// this.isshow =!this.isshow;
+		// 所以只能使用vue对象实例去做操作
+		vm.isshow = !vm.isshow;
+	}
+});
+
+var vm = new Vue({
+	el:'#app',
+	data:{
+		isshow:false
+	},
+	methods:{
+		toggle:function(){
+			this.isshow = !this.isshow;
+		}
+	}
+});
+</script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../vue1026.js"></script>
+	<script src="../vue-resource121.js"></script>
+</head>
+<body>
+	<div id="app">
+		<button @click="postdata">post提交数据</button>
+	</div>
+</body>
+<script>
+new Vue({
+	el :'#app',
+	methods:{
+		postdata:function(){
+			// 将数据通过vue-resource的post方法提交给http://vueapi.ittun.com/api/addproduct
+			 var url = 'http://vueapi.ittun.com/api/addproduct';
+
+			 // 2.0 调用 $http.post(url,传入到服务器的请求报文体的数据,{emulateJSON:true})方法
+			 this.$http.post(url,{name:'奔驰'},{emulateJSON:true})
+			 .then(function(response){
+			 	alert(response.body.message);
+			 });
+		}
+	}
+})
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../vue1026.js"></script>
+</head>
+<body>
+	<div id="app">
+		<button @click="getdom">获取dom对象</button>
+		<div v-el:mydiv id="div1">hello v-el</div>
+
+	<button @click="getcom">获取组件对象</button>
+		<login v-ref:mycom></login>
+	</div>
+</body>
+<script>
+new Vue({
+	el:'#app',
+	methods:{
+		getdom:function(){
+			// 获取到id=div1的div对象
+			// 有两种方式可以完成
+			//1、通过传统的document
+			console.log(document.getElementById('div1').innerHTML);
+
+			// 2、vuejs的写法
+			console.log(this.$els.mydiv.innerHTML);
+		},
+		getcom:function(){
+			console.log(this.$refs.mycom.subname);
+		}
+	},
+	// 定义一个私有组件(子组件)
+	components:{
+		'login':{
+			data:function(){
+				return {
+				subname:'子组件名称'
+				}
+			},
+			template:'<h1>这是一个子组件</h1>'
+		}
+	}
+
+});
+</script>
+</html>

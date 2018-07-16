@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../vue1026.js"></script>
+</head>
+<body>
+<template id="sub">
+	{{id}}
+</template>
+	<div id="app">
+	<!-- 2.0 通过在父组件中调用子组件的时候利用 :绑定对应的props中定义的参数再讲值传递给子组件即可 -->
+		<sub :id="id"></sub>
+	</div>
+</body>
+<script>
+
+// 我们可以认为对象实例是一个跟组件
+new Vue({
+	el:'#app',
+	data:{
+		id:100
+	},
+	components:{
+		'sub':{
+			template:'#sub',
+			props:['id'] //1.0 负责接收父组件传入的值
+		}
+	}
+});
+</script>
+</html>

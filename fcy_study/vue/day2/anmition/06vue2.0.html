@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.show{
+		transition:all 0.3s ease;
+	}
+	</style>
+	<script src='../vue221.js'></script>
+</head>
+<body>
+	<div id="app">
+	<button @click="toggle">显示和隐藏数据</button><br>
+	<transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+		<div v-if="isshow" class="show">hello vuejs</div>
+	</transition>
+	</div>
+</body>
+<script>
+
+
+var vm = new Vue({
+	el:'#app',
+	data:{
+		isshow:false
+	},
+	methods:{
+		toggle:function(){
+			this.isshow = !this.isshow;
+		},
+		beforeEnter:function(el){
+			el.style.transform = "translate(100px,0)";
+		},
+		enter:function(el,done){
+			el.offsetWidth;
+
+			el.style.transform = "translate(0px,0)";
+
+			done();
+		},
+		afterEnter:function(el){
+			this.isshow =  !this.isshow;
+		}
+	}
+});
+</script>
+</html>

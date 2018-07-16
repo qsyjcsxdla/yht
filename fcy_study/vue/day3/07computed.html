@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue1026.js"></script>	
+</head>
+<body>
+	<div id="app">
+	<input type="text" v-model="firstName">
+	<input type="text" v-model="lastName">
+
+	{{fullName}}
+	</div>
+	
+</body>
+<script>
+new Vue({
+	el:'#app',
+	data:{
+		firstName:'heima',
+		lastName:'itcast'
+	},
+	computed:{
+		fullName:function(){
+			return this.firstName + this.lastName;
+		}
+	}
+});
+</script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../vue1026.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{ time }} <br />
+		{{ time | datefmt }}
+	</div>
+
+	<div id="app1">
+		{{ time | datefmt }}
+	</div>
+</body>
+<script>
+new Vue({
+	el:'#app1',
+	data:{
+		time:new Date()
+	},
+	filters:{
+		// input是自定义过滤器的默认参数，input的值永远都是取自于 | 左边的内容
+		datefmt:function(input){
+			// 过滤器的逻辑：将input的值格式化成 yyyy-MM-dd 字符串输出
+			var res= '';
+			var year = input.getFullYear();
+			var month = input.getMonth() + 1;
+			var day = input.getDate();
+
+			res = year +'-' + month +'-'+ day;
+
+			return res;
+		}
+	}
+})
+
+new Vue({
+	el:'#app',
+	data:{
+		time:new Date()
+	},
+	//在某一个vue对象内部定义的过滤器称之为私有过滤器，
+	//这种过滤器只有在当前vue对象el指定的监管的区域有用
+	filters:{
+		// input是自定义过滤器的默认参数，input的值永远都是取自于 | 左边的内容
+		datefmt:function(input){
+			// 过滤器的逻辑：将input的值格式化成 yyyy-MM-dd 字符串输出
+			var res= '';
+			var year = input.getFullYear();
+			var month = input.getMonth() + 1;
+			var day = input.getDate();
+
+			res = year +'-' + month +'-'+ day;
+
+			return res;
+		}
+	}
+});
+</script>
+</html>

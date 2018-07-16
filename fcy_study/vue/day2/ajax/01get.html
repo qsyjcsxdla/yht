@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- 1.0 按照先后顺序导入vuejs和vue-resourcejs -->
+	<script src="../vue1026.js"></script>
+	<script src="../vue-resource121.js"></script>
+
+</head>
+<body>
+	<div id="app">
+	{{ obj | json }}
+		<button @click = "getdata">get请求</button>
+	
+	</div>
+</body>
+
+<script>
+new Vue({
+	el :'#app',
+	data:{
+		obj:null
+	},
+	methods:{
+		getdata:function(){
+			// 1.0 请求的url
+			var url = 'http://vueapi.ittun.com/api/getprodlist'
+
+			// 2.0 利用 vue-resource发出ajax的get请求
+			this.$http.get(url)  //发出请求
+			.then(function(response){
+				/**response.body 就是获取到 http://vueapi.ittun.com/api/getprodlist 响应回来的数据格式为：
+				{
+				  "status": 0,
+				  "message": [
+				    {
+				      "id": 1,
+				      "name": "奥迪",
+				      "ctime": "2017-02-07T10:32:07.000Z"
+				    },
+				    {
+				      "id": 2,
+				      "name": "宝马",
+				      "ctime": "2017-02-07T10:32:17.000Z"
+				    }
+				  ]
+				}*/
+				this.obj = response.body;
+
+			}) // 获取服务器响应回来的数据
+		}
+	}
+});
+</script>
+</html>

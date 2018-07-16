@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue1026.js"></script>
+	<script src="vue-router1.0.min.js"></script>
+</head>
+<body>
+	<div id="app">
+	<a href="#" v-link="{path:'/account/login'}">登录</a>
+	<a href="#" v-link="{path:'/account/register'}">注册</a>
+
+<!--占位来显示具体的组件内容 -->
+		<router-view></router-view>
+	</div>
+</body>
+<script>
+  // 1.0 实例化Router对象
+  var router = new VueRouter();
+
+  // 2.0 定义相关组件
+  var App = Vue.extend({});
+
+   var account = Vue.extend({
+   	template:'<router-view></router-view>'
+   });
+
+    var login = Vue.extend({
+   	template:'<h1>登录</h1>'
+   });
+
+     var register = Vue.extend({
+   		template:'<h1>注册</h1>'
+   });
+
+  // 3.0 完成嵌套路由的写法
+  router.map({
+  	'account':{
+  		component:account,
+  		subRouters:{
+  			'login':{component:login},
+  			'register':{component:register}
+  		}
+  	}
+  });
+
+  // 4.0 启动路由
+  router.start(App,'#app');
+
+// 5.0 启动的时候默认显示登录页面
+	router.redirect({'/':'/account/login'});
+</script>
+</html>

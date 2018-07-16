@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue1026.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="text" value="itcast" v-color="color" v-focus>
+	</div>
+
+	<div id="app1">
+		<input type="text" value="itcast" v-color="color" v-focus>
+	</div>
+</body>
+<script>
+
+// Vue.directive('focus',function(){
+// 	this.el.focus();
+// });
+
+Vue.directive('color',function(){
+
+	this.el.style.color =this.vm[this.expression];
+
+});
+
+var vm = new Vue({
+	el:'#app',
+	data:{
+		color:'red'
+	}
+})
+
+var vm = new Vue({
+	el:'#app1',
+	data:{
+		color:'blue'
+	}
+})
+</script>
+</html>

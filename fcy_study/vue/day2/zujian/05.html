@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../vue1026.js"></script>
+</head>
+<body>
+<template id="sub">
+<button @click="senddata">发送数据给父组件</button>
+</template>
+
+	<div id="app">
+		<sub v-on:send="getdata"></sub>
+	</div>
+</body>
+<script>
+
+// 我们可以认为对象实例是一个跟组件
+new Vue({
+	el:'#app',
+	methods:{
+		getdata:function(input){
+			alert(input);
+		}
+	},
+	components:{
+		'sub':{
+			template:'#sub',
+			methods:{
+				senddata:function(){
+					// 将hello传值给父组件
+					this.$emit('send','hello');
+				}
+			}
+		}
+	}
+});
+</script>
+</html>

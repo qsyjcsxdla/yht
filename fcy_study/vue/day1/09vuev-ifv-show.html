@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue1026.js"></script>
+</head>
+<body>
+	<div id="app">
+	<button v-on:click="toggle">显示隐藏切换</button>
+		<div v-show="isshow">div的值</div>
+	</div>
+</body>
+<script>
+/*
+
+
+ */
+new Vue({
+	el:'#app',
+	data:{
+		isshow:true
+	},
+	methods:{
+		toggle:function(){
+			//实现业务则只需要将isshow的值每次都取反即可
+			this.isshow =!this.isshow;
+		}
+	}
+});
+</script>
+</html>

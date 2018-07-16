@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../vue1026.js"></script>
+</head>
+<body>
+ <template id="account">
+ {{msg}}
+ <a href="#" @click="login">登录</a>  |  <a href="#">注册</a>
+ </template>
+
+ <script type="x-template" id="account1">
+ 	<a href="#">登录1</a>  |  <a href="#">注册1</a>
+ </script>
+
+	<div id="app">
+	<account></account>
+		<login></login>
+		<register></register>
+	</div>
+</body>
+<script>
+// 1.0 定义一个全局组件写法1
+// 定义组件
+var login = Vue.extend({
+	template:'<h1>登录页面</>'
+});
+
+// 注册组件
+Vue.component('login',login);
+
+// 2.0 定义一个全局组件写法2：
+Vue.component('register',{
+	template:'<h1>注册页面</>'
+});
+
+// 3.0 定义一个账号组件写法3（推荐写法）
+Vue.component('account',{
+	template:'#account',
+	//注意：在组件中使用data定义的是一个方法而不是一个对象，否则无效果
+	data:function(){
+		return {
+			msg:'账户组件页面'
+		}
+	},
+	methods:{
+		login:function(){
+			alert('login')
+		}
+	}
+});
+
+
+new Vue({
+	el :'#app'
+});
+</script>
+</html>

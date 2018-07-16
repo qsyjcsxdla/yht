@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="../animate.css">
+	<style type="text/css">
+		.show{
+			transition:all 0.4s ease;
+		}
+	</style>
+	<script src="../vue221.js"></script>
+
+</head>
+<body>
+	<div id="app">
+	<button @click="toggle">显示和隐藏数据</button><br>
+	<transition enter-active-class='fadeInRight' 
+				leave-active-class="fadeOutRight" >
+
+		<div v-show="isshow" class="animated" class="show">hello vuejs</div>
+	</transition>
+	</div>
+</body>
+<script>
+
+new Vue({
+	el :'#app',
+	data:{
+		isshow:false
+	},
+	methods:{
+		toggle:function(){
+			this.isshow = !this.isshow;
+		}
+	}
+});
+</script>
+</html>
