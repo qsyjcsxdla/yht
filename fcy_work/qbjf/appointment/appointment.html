@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="robots" content="none"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport" id="viewport">
+    <title>优先预约</title>
+    <link href="../../Skins/css/common.css" rel="stylesheet">
+    <script src="../../Skins/js/common/jquery-1.11.3.js" type="text/javascript"></script>
+    <script src="../../Skins/js/common/underscore-min.js" type="text/javascript"></script>
+    <script src="../../Skins/js/common/resolve.js" type="text/javascript"></script>
+    <script src="../../Skins/js/common/fc.js" type="text/javascript"></script>
+    <style type="text/css">
+        button,
+        html input[type=button],
+        input[type=reset],
+        input[type=submit] {
+            -webkit-appearance: button;
+            cursor: pointer
+        }
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        *:before, *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        *:focus {outline: none;}
+        body {
+            line-height: 1;
+            background: #F3F3F5;
+            position: relative;
+            height: 100%;
+        }
+        html {
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            height: 100%;
+        }
+        select {
+            appearance:none;
+            -moz-appearance:none;
+            -webkit-appearance:none;
+            background: url("../../Skins/img/common/arrow.png") no-repeat scroll right center transparent;
+            padding-right: .3rem;
+            padding-left: .85rem;
+            background-size: .16rem;
+            direction: rtl;
+        }
+
+        label{
+            font-size: .28rem;
+        }
+        .all {
+            max-width: 7.5rem;
+            min-width: 3.2rem;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: .6rem;
+            font-size: .24rem;
+        }
+        .basic_box{
+            background-color: white;
+            height: .86rem;
+            position: relative;
+            width: 100%;
+
+        }
+        .yu_box{
+            height: .86rem;
+            position: relative;
+            width: 60%;
+            margin: .1rem auto;
+            padding-top: .3rem;
+        }
+        .input_s{
+            font-size: .28rem;
+            height: .86rem;
+            border: 0px;
+            width: 88%;
+            padding-left: .85rem;
+        }
+        .input_c{
+            font-size: .28rem;
+            height: .86rem;
+            border: 0px;
+            width: 85%;
+            padding-left: 1.7rem;
+        }
+        .input_c1{
+            font-size: .28rem;
+            height: .86rem;
+            border: 0px;
+            width: 74%;
+            padding-left: 1.7rem;
+        }
+        input[type="radio"] {
+            margin: 3px 3px 0px 5px;
+            display: none;
+        }
+        .label_t{
+            font-size: .28rem;
+            padding-left: .3rem
+        }
+        .label1 {
+            padding-left: .4rem;
+            cursor: pointer;
+            background: url("../../Skins/img/common/sel_un.png") no-repeat left center;
+            background-size: .28rem;
+        }
+        .label1.checked {
+            background: url("../../Skins/img/common/sel_on.png") no-repeat left center;
+            background-size: .28rem;
+            color:#1578D8
+        }
+        .moblie_img{
+            background: url("../../Skins/img/common/mobile.png") no-repeat 0.33rem center;
+            background-size: .32rem;
+        }
+        .peo_img{
+            background: url("../../Skins/img/common/peo.png") no-repeat 0.3rem center;
+            background-size: .32rem;
+        }
+        .xian_box{
+            width: 100%;
+            margin: 0 auto;
+            background: #fff;
+        }
+        .xian{
+            width: 92%;
+            margin: 0 auto;
+            height: 1px;
+            background: #eee;
+        }
+        .message_big_box{
+            width: 100%;
+            background: #fff
+        }
+        .message_box{
+            width: 100%;
+            text-indent: .35rem;
+            font-size: .28rem;
+            color: #333;
+            line-height: .28rem;
+            padding: .35rem 0 .2rem 0;
+        }
+        .message{
+            outline:none;
+            width: 91%;
+            height: 1.85rem;
+            background: #fff;
+            margin: 0 4.5%;
+            border: none;
+            font-size: .26rem;
+            line-height: .36rem;
+            color: #666;
+        }
+        .btn_sure{
+            margin: .6rem 0.58rem 0;
+            background: #1578D8;
+            font-size: .33rem;
+            color: #fff;
+            text-align: center;
+            height: .76rem;
+            line-height: .76rem;
+            width: 6.34rem;
+            border:1px solid #eee;
+
+        }
+        .errBox {
+            position: absolute;
+            width: 100%;
+            top: 42%;
+            text-align: center;
+            z-index: 2000;
+        }
+        #errMsg {
+            background-color: rgba(0,0,0,.7);
+            /*display: none;*/
+            margin: auto;
+            font-size: .28rem;
+            line-height: .68rem;
+            height: .68rem;
+            color: #fff;
+            width: 73.3%;
+            word-wrap: break-word;
+        }
+        ._loading {
+            position: fixed;
+            z-index: 9000;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+        ._loadbox {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            z-index: 9200;
+            width: 1.6rem;
+            margin-left:-0.8rem;
+            margin-top:-0.8rem;
+            padding: 0.25rem 0;
+            background: #444;
+        }
+        .loadimg{
+            display:block;
+            margin:0 auto;
+        }
+        ._loadbox p{
+            text-align:center;
+            margin-top: 0.15rem;
+            font-size:0.2577rem;
+        }
+        .alert-bg {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, .5);
+            display: none;
+        }
+       .alert {
+            overflow: hidden;
+            color: #333333;
+            font-size: .28rem;
+            line-height: .3rem;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            z-index: 1001;
+            border-radius: .2rem;
+            width:5.4rem ;
+            background: #fff;
+            height:3.16rem;
+            margin-top: -1.58rem;
+            margin-left: -2.7rem;
+        }
+        .content_box{
+            height: 2.26rem;
+            border-bottom: 1px solid #CACACA;
+        }
+        .content_title{
+            text-align: center;
+            padding-top: .68rem;
+            margin-bottom: .5rem;
+        }
+        .content_body{
+            text-align: center;
+        }
+        .content_footer{
+            color: #1578D8;
+            font-size: .34rem;
+            height: .9rem;
+            line-height: .9rem;
+            overflow: hidden;
+            text-align: center;
+        }
+        .footer_l{
+            width: 2.69rem;
+            text-align: center;
+        }
+        .footer_c{
+            width: 1px;
+            height: .9rem;
+            background: #CACACA;
+        }
+        .activity_d{
+            color: #666;
+            font-size: .24rem;
+            width: 6.23rem;
+            text-align: left;
+            margin: .24rem auto 0;
+            line-height: .36rem;
+        }
+    </style>
+</head>
+<body>
+<div class="all">
+    <form action="" id="yu_form">
+        <div class="form-group basic_box mt-20">
+            <label for="name">
+                <input id="name" type="text " class="input_s peo_img" maxlength="6" placeholder="请输入您的中文姓名">
+            </label>
+        </div>
+        <div class="xian_box" >
+            <div  class="xian"></div>
+        </div>
+        <div class="form-group basic_box" >
+            <label for="phone"><input id="phone" type="number" maxlength="11" class="input_s moblie_img" placeholder="请输入您的手机号码"></label>
+        </div>
+        <div class="form-group basic_box mt-20" id="qixian">
+            <label for="time"  class="label_t">期限
+                <select id="time" class="input_c" dir="rtl">
+                    <option value ="0">请选择</option>
+                    <option value ="1">3个月内</option>
+                    <option value ="2">3-6个月</option>
+                    <option value="3">6-12个月</option>
+                    <option value="4">12个月以上</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group basic_box mt-20" id="jinge">
+            <label for="money" class="label_t">金额（元）
+                <select id="money" class="input_c1" dir="rtl">
+                    <option value ="0">请选择</option>
+                    <option value ="1">5万以内</option>
+                    <option value ="2">5-15万</option>
+                    <option value="3">15-30万</option>
+                    <option value="4">30-50万</option>
+                    <option value="5">50万以上</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group yu_box mt-20" id="yuyue">
+            <input type="radio"  name="category" value="INVEST"  id="invest" >
+            <label for="invest" name="INVEST" checked class="label1  label2" id='label1' style="padding-right: .5rem">预约投资</label>
+            <input type="radio" name="category" value="LOAN" id="loan" >
+            <label for="loan" name="LOAN" class="label1 label3" id='label2' style="margin-left: .5rem">预约贷款</label>
+        </div>
+        <div class="form-group mt-20 " >
+            <div style="width: 100%; background: #fff" class="message_big_box ">
+                <div  class="message_box ">留言:</div>
+                <textarea class="message" maxlength="200"></textarea>
+            </div>
+            <div  style=" font-size: .2rem; color: #999; width: 88%; margin: .2rem auto; text-align: right">留言最多可输入200字</div>
+        </div>
+        <div class="btn-group">
+            <input type="reset" style="display:none;" >
+            <button class="btn_sure" id="submit_btn" type="button">确定</button>
+        </div>
+    </form>
+    <div class="activity_d" id="activity1">如有投资、贷款意向或参加活动，请先预约；<br>如有疑问，请拨打：96811转衢报金服。</div>
+    <div class="activity_d" id="activity2">预想参加本次活动，请先预约；<br>如有疑问，请拨打：96811转衢报金服。</div>
+</div>
+<div class="alert-bg "></div>
+<div class="errBox">
+    <div id="errMsg" style="display: none"></div>
+</div>
+</body>
+
+<script>
+
+    var actId; //判断区分期限、金额、预约类型是否显示  1表示不显示，其余表示显示
+    var url = 'http://61.164.59.236:8087/';
+    /*
+    * 本地：http://192.168.10.25:8084/
+    * 测试：http://61.164.59.236:8087/
+    * 回归：
+    * 正式：
+    * */
+    $(function(){
+        actId = getQueryValue('actId');
+        if(actId == 1){
+            $("#qixian,#jinge,#yuyue,#activity1").hide();
+            $('#activity2').show()
+        }else{
+            $("#qixian,#jinge,#yuyue,#activity1").show();
+            $('#activity2').hide()
+        }
+    })
+
+    //单选框样式修改
+    function labelC(e) {
+        e.click(function(){
+            var radioId = $(this).attr('name');
+            $('.label1').removeAttr('class') && $(this).attr({'class': 'checked label1'}).siblings('label').attr({'class': 'label1'});
+            $('input[type="radio"]').removeAttr('checked') && $('#' + radioId).attr('checked', 'checked');
+        })
+    }
+    labelC($('.label2'));
+    labelC($('.label3'));
+
+    // 手机号码输入过程中校验（锁定只能输入数字不大于11位数）
+    var phoneNumberOrg = "",
+        regexPhone = /^((13)|(14)|(15)|(18)|(17))(\d{0,9})$/, ///^\d{0,11}$/;
+        nameChina = "",
+        regexName  = /^[\u4E00-\u9FA5]{1,6}$/;
+    $("#phone").keyup(function() {
+        if (($("#phone").val() == "") || ($("#phone").val() == "1") || regexPhone.test($("#phone").val())) {
+            phoneNumberOrg = $(this).val();
+            $('#phone').val(phoneNumberOrg);
+        } else {
+            $("#errMsg").html("请输入正确的手机号码");
+            delayOut();
+            $(this).val(phoneNumberOrg);
+        }
+    });
+
+    // 中文姓名输入完成校验（只能输入中文并且不能大于6个中文字符）
+    $("#name").blur(function() {
+        if (($('#name').val() == "") ||  regexName.test($('#name').val())) {
+            nameChina = $(this).val();
+            $('#name').val(nameChina);
+        } else {
+            $("#errMsg").html("请输入中文名字");
+            delayOut()
+            $(this).val('');
+        }
+    });
+
+    //提交表单
+    $('#submit_btn').on('click', function() {
+        if(actId == 1){
+            if (!validate_required($("#name"), "请输入您的姓名")) return false;
+            if (!validate_required($("#phone"), "请输入您的手机号")) return false;
+            if ($('#phone').val().length != 11) {
+                $("#errMsg").html("请输入完整的手机号码");
+                delayOut();
+                return false;
+            } else{
+                sendRequest(JSON.stringify(mkrequestForOpeData(iphoneType,systime,'RESERVE_QB')));
+            }
+        }else{
+            if (!validate_required($("#name"), "请输入您的姓名")) return false;
+            if (!validate_required($("#phone"), "请输入您的手机号")) return false;
+            if($('#time').val()=='0'){
+                $("#errMsg").html("请选择期限");
+                delayOut();
+                return false;
+            }
+            if($('#money').val()=='0'){
+                $("#errMsg").html("请选择金额");
+                delayOut();
+                return false;
+            }
+            if($('input:radio[name="category"]:checked').val()=='undefind'||$('input:radio[name="category"]:checked').val()==null||$('input:radio[name="category"]:checked').val()==' '){
+                $("#errMsg").html("请选择预约类型");
+                delayOut();
+                return false;
+            }
+            if ($('#phone').val().length != 11) {
+                $("#errMsg").html("请输入完整的手机号码");
+                delayOut();
+                return false;
+            } else{
+                sendRequest(JSON.stringify(mkrequestForOpeData(iphoneType,systime,'RESERVE_QB')));
+            }
+        }
+    });
+
+    function sendRequest(content) {
+        $('#submit_btn').attr('disabled','disabled')
+        $.ajax({
+            type : "get",
+            contentType : "application/jsonp; charset=utf-8",
+            url : url+"wxtapp-qb/handle",
+            data : {
+                "BSData" : content
+            },
+            async:false,
+            dataType : 'jsonp',
+            jsonp : "jsonpCallback",
+            jsonpCallback : "callbackFun",
+            success : function (data) {
+                var json = data.head;
+                $("input[type=reset]").trigger("click");
+                $('#label1').removeAttr('class').attr({'class': 'label1 label2'});
+                $('#label2').removeAttr('class').attr({'class': 'label1 label3'});
+                if(json.resultcode == '000000'){
+                    $('.alert-bg').show();
+                    alertbox(1);
+                    $('#btn_y').click(function(){
+                        $('.alert-bg').hide();
+                        $('.alert').remove();
+                        $('#submit_btn').removeAttr('disabled','disabled')
+                    })
+                }else{
+                    $('.alert-bg').show();
+                    alertbox(0);
+                    $('#btn_n').click(function(){
+                        $('.alert-bg').hide();
+                        $('.alert').remove();
+                        $('#submit_btn').removeAttr('disabled','disabled')
+                    })
+                    $('#btn_a').click(function(){
+                        $('.alert-bg').hide();
+                        $('.alert').remove();
+                        $('#name').focus();
+                        $('#submit_btn').removeAttr('disabled','disabled')
+                    })
+                }
+            }
+        });
+    }
+    //提交的信息
+    function mkrequestForOpeData(iphoneType,systime,bizcode) {
+        return {
+            "head" : {
+                "device" : iphoneType ||'',
+                "token" : "",
+                "type" : "REQUEST",
+                "gmt_created" :systime,
+                "bizcode" : bizcode
+            },
+            "body" : {
+                userName: $('#name').val(),
+                recvPhone: $('#phone').val(),
+                termRange: $('#time').val(),
+                fundsRange: $('#money').val(),
+                orderType: $('input:radio[name="category"]:checked').val(),
+                remark: $('.message').val() || '',
+            },
+        };
+    }
+
+    function alertbox(a){
+        var alertbox= '';
+        alertbox = '<div class="alert" >';
+        alertbox += '<div class="content_box" >';
+        if(a == 1){
+            alertbox += '<span class="show f-34 c-333 content_title">预约成功!</span>';
+            alertbox += '<span class="show f-28 c-666 content_body" >工作人员将在7个工作日内联系您！</span>';
+            alertbox += '</div>';
+            alertbox += '<div class="content_footer " id="btn_y" >好的</div>';
+        }else if(a == 0){
+            alertbox += '<span class="show f-34 c-333 content_title">预约失败!</span>';
+            alertbox += '<span class="show f-28 c-666 content_body" >预约失败！请重新预约！</span>';
+            alertbox += '</div>';
+            alertbox += '<div class="content_footer">';
+            alertbox += '<div class="footer_l float-left" id="btn_a">重新输入</div>';
+            alertbox += '<div class="footer_c float-left"></div>';
+            alertbox += '<div class="footer_l float-left" id="btn_n">取消</div>';
+            alertbox += '</div>';
+        }
+        alertbox += '</div>';
+        $('body').append(alertbox)
+    }
+</script>
+</html>

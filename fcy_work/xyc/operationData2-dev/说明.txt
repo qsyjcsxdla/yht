@@ -1,0 +1,8 @@
+
+	开发环境经过coolie build 配置到生产环境说明
+	
+	1.需要改coolie.json文件中的   
+     "host": "/tomcat下的第一级目录名称/operationalData-pro/"
+    2.需要改statics/js/app下的main.js中imgPath路劲
+     var imgPath = "http://192.168.10.234:8008/"; 此时是234上的测试环境
+     var imgPath=	"http://handle.cfxyc.cn/"; 应该是正式运营环境

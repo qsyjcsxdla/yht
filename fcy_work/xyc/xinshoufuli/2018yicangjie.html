@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="robots" content="none"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport" id="viewport">
+    <title>一起来理财·欢庆义仓节</title>
+    <script src="js/lib/jquery.1.11.1.js"></script>
+    <script src="js/lib/underscore-min.js"></script>
+    <script>
+        (function () {
+            // deicePixelRatio ：设备像素
+            var scale = 1 / devicePixelRatio;
+            //设置meta 压缩界面 模拟设备的高分辨率
+            //document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+            //debounce 为节流函数，自己实现。或者引入underscoure即可。
+            var reSize = _.debounce(function () {
+                //        var deviceWidth = document.documentElement.clientWidth > 1300 ? 1300 : document.documentElement.clientWidth;
+                var deviceWidth = document.documentElement.clientWidth > 750 ? 750 : document.documentElement.clientWidth;
+                //按照640像素下字体为100px的标准来，得到一个字体缩放比例值 6.4
+                document.documentElement.style.fontSize = (deviceWidth / 7.5) + 'px';
+            }, 50);
+
+            window.onresize = reSize;
+
+            reSize();
+
+        })();
+    </script>
+    <style type="text/css">
+        button,
+        html input[type=button],
+        input[type=reset],
+        input[type=submit] {
+            -webkit-appearance: button;
+            cursor: pointer
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        *:before, *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            line-height: 1;
+            background: #fff;
+            position: relative;
+            height: 100%;
+        }
+
+        html {
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            height: 100%;
+        }
+
+        .all {
+            max-width: 7.5rem;
+            min-width: 3.2rem;
+            width: 100%;
+            margin: 0 auto;
+            background:#ffac1a ;
+            padding-bottom: .6rem;
+        }
+        .full-x{
+            width: 100%;
+            display: block;
+        }
+        .pat{
+            position: relative;
+        }
+        .btn{
+            position: absolute;
+            background: rgba(0,0,0,0);
+            width: 3.65rem;
+            display: block;
+            height: 0.8rem;
+            border-radius: 0.4rem;
+        }
+
+        .new_btn{
+            bottom: .9rem;
+            left: .67rem;
+        }
+        .gule1_btn{
+            bottom: .51rem;
+            left: 1.94rem;
+            cursor: pointer;
+        }
+        .gule2_btn{
+            bottom: .63rem;
+            left: 1.94rem;
+            cursor: pointer;
+        }
+        .fri_btn{
+            bottom: 1.7rem;
+            left: 1.94rem;
+        }
+
+        /*弹框*/
+
+        .alert {
+            display: none;
+            overflow: hidden;
+            /*background-color: #ffffff;*/
+            color: #333333;
+            font-size: .24rem;
+            line-height: .3rem;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            z-index: 1001;
+            border-radius: .1rem;
+            -webkit-border-radius: .1rem;
+        }
+
+        .alert-bg {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, .7);
+        }
+        .alert-popup1 {
+            width: 6.9rem;
+            height: 7.25rem;
+            margin-top: -3.625rem;
+            margin-left: -3.45rem;
+            /*padding-bottom: 1.4rem;*/
+        }
+        .alert-popup2 {
+            width: 6.9rem;
+            height: 6.34rem;
+            margin-top: -3.17rem;
+            margin-left: -3.45rem;
+            /*padding-bottom: 1.4rem;*/
+        }
+
+    </style>
+</head>
+<body>
+<div class="all">
+    <div class="top-banner">
+        <img class="full-x" src="images/2018yicangjie/yc_1.png" alt=""/>
+    </div>
+    <div class="pat">
+        <img class="full-x" src="images/2018yicangjie/yc_2.png" alt=""/>
+        <a href="./benefits.html" class="new_btn btn"></a>
+    </div>
+    <div class="pat">
+        <img class="full-x" src="images/2018yicangjie/yc_3.png" alt=""/>
+        <span class="gule1_btn btn" onclick="popRule1()"></span>
+    </div>
+    <div class="pat">
+        <img class="full-x" src="images/2018yicangjie/yc_4.png" alt=""/>
+        <span class="gule2_btn btn" onclick="popRule2()"></span>
+    </div>
+    <div class="pat">
+        <img class="full-x" src="images/2018yicangjie/yc_5.png" alt=""/>
+        <a href="./activity.html" class="fri_btn btn"></a>
+    </div>
+</div>
+
+<!--弹窗1-->
+<div class="alert alert-popup1">
+    <img src="images/2018yicangjie/yc_alt1.png" class="full-x close_pop">
+</div>
+<!--弹窗2-->
+<div class="alert alert-popup2">
+    <img src="images/2018yicangjie/yc_alt2.png"  class="full-x close_pop">
+</div>
+
+</body>
+<script>
+    //第一个弹窗
+    function popRule1() {
+        var tmp = '<div class="alert-bg"></div>';
+        $("body").append(tmp);
+        $(".alert-popup1").show();
+        closeBtn();
+    }
+    //第二个弹窗
+    function popRule2() {
+        var tmp = '<div class="alert-bg"></div>';
+        $("body").append(tmp);
+        $(".alert-popup2").show();
+        closeBtn();
+    }
+    //关闭弹窗
+    function closeBtn(){
+        $(".alert-bg,.close_pop").on("click", function () {
+            $(".alert-bg").remove();
+            $(".alert").hide();
+        })
+    }
+
+</script>
+</html>

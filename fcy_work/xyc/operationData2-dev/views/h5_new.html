@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="robots" content="none"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport" id="viewport">
+    <title>信义仓运营数据</title>
+    <script type="text/javascript" src="../statics/js/app/jquery.min.js"></script>
+    <script type="text/javascript" src="../statics/js/app/underscore-min.js"></script>
+    <script>
+        (function () {
+            // deicePixelRatio ：设备像素
+            var scale = 1 / devicePixelRatio;
+            //设置meta 压缩界面 模拟设备的高分辨率
+            //document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+            //debounce 为节流函数，自己实现。或者引入underscoure即可。
+            var reSize = _.debounce(function () {
+                //        var deviceWidth = document.documentElement.clientWidth > 1300 ? 1300 : document.documentElement.clientWidth;
+                var deviceWidth = document.documentElement.clientWidth > 750 ? 750 : document.documentElement.clientWidth;
+                //按照640像素下字体为100px的标准来，得到一个字体缩放比例值 6.4
+                document.documentElement.style.fontSize = (deviceWidth / 7.5) + 'px';
+            }, 50);
+
+            window.onresize = reSize;
+
+            reSize();
+
+        })();
+    </script>
+    <style type="text/css">
+        button,
+        html input[type=button],
+        input[type=reset],
+        input[type=submit] {
+            -webkit-appearance: button;
+            cursor: pointer
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        *:before, *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .over-scroll{
+            overflow:-Scroll;
+            overflow-y:hidden;
+        }
+
+        body {
+            line-height: 1;
+            background: #fff;
+            position: relative;
+            height: 100%;
+        }
+
+        html {
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            height: 100%;
+        }
+
+        .alert_bg{
+            position:fixed;
+            left:0;
+            bottom: 0;
+            z-index:1000;
+            width:100%;
+            top:0;
+            right: 0;
+            background: #F1F0F5;
+        }
+        .alert_box{
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            z-index: 1001;
+            width: 2rem;
+            height: 2rem;
+            margin-left: -1rem;
+            margin-top: -1rem;
+        }
+        .alert_box img{
+            width: 2rem;
+            height: 2rem;
+            margin: 0 auto;
+            display: block;
+        }
+        .all {
+            max-width: 7.5rem;
+            min-width: 3.2rem;
+            width: 100%;
+            margin: 0 auto;
+            background:#fff ;
+            /* padding-bottom: .6rem;*/
+            position: relative;
+        }
+        .full-x{
+            width: 100%;
+            display: block;
+        }
+        .absolute{
+            position: absolute;
+        }
+        .title{
+            top: .882rem;
+            font-size:.58rem;
+            color:#fff;
+            width: 100%;
+            text-align: center;
+            font-weight:bold;
+        }
+        .time{
+            top:1.739rem;
+            font-size:.247rem;
+            color:#fff;
+            width: 100%;
+            text-align: center
+        }
+        .part1{
+            top:4.958rem;
+            left:3.14%;
+            width: 93.56%;
+            height: 2.4092rem;
+        }
+        .part2{
+            top:8.122rem;
+            left:22.79%;
+            width: 73.91%;
+            height: 2.4092rem;
+        }
+        .part3{
+            top:11.286rem;
+            left:3.865%;
+            width: 73.91%;
+            height: 2.4092rem;
+        }
+        .part4{
+            top:14.45rem;
+            left:22.79%;
+            width: 73.91%;
+            height: 2.4092rem;
+        }
+        .part5{
+            top:17.615rem;
+            left:3.37%;
+            width: 73.91%;
+            height: 2.4092rem;
+        }
+        .part .img_box{
+            width: 100%;
+            height: 2.4092rem;
+            position: relative;
+        }
+        .part .img_box img{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .part .img_box p{
+            font-size: .50rem;
+            font-weight: bold;
+            background: -webkit-linear-gradient(left, #f2288b, #9530b0);
+            background: -moz-linear-gradient(left, #f2288b, #9530b0);
+            background: -o-linear-gradient(left, #f2288b, #9530b0);
+            background: -ms-linear-gradient(left, #f2288b, #9530b0);
+            background: linear-gradient(to right, #f2288b, #9530b0);
+            color: transparent;
+            -webkit-background-clip: text;
+        }
+        .part1 .img_box p{
+            position: absolute;
+            left:26.24%;
+            top:1.02rem;
+        }
+        .part2 .img_box p{
+            position: absolute;
+            left:29.412%;
+            top:1.05rem;
+        }
+        .part3 .img_box p{
+            position: absolute;
+            left:33.22%;
+            top:1.05rem;
+        }
+        .part4 .img_box p{
+            position: absolute;
+            left:29.412%;
+            top:1.05rem;
+        }
+        .part5 .img_box p{
+            position: absolute;
+            left:36.6%;
+            top:1.05rem;
+        }
+    .footer{
+        width: 100%;
+        font-size: .28rem;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        bottom: .6rem;
+        color: #C3A9F6;
+    }
+    </style>
+    <!--coolie-->
+    <script type="text/javascript" src="../statics/js/app/loading.js"></script>
+    <!--/coolie-->
+</head>
+<body class="over-scroll"  id="body">
+<div class="all">
+    <img src="../statics/img/bg_bak.png" class="full-x">
+    <div>
+        <p class="title absolute">信义仓平台数据</p>
+        <p class="time absolute">数据截止至
+            <span id="date"></span>
+        </p>
+        <div class="part1 absolute part">
+            <div class="img_box">
+                <img src="../statics/img/part1.png" class="full-x">
+                <p id="operData1">数据加载中…</p>
+            </div>
+        </div>
+        <div class="part2 absolute part">
+            <div class="img_box">
+                <img src="../statics/img/part2.png" class="full-x">
+                <p id="operData2">数据加载中…</p>
+            </div>
+        </div>
+        <div class="part3 absolute part">
+            <div class="img_box">
+                <img src="../statics/img/part3.png" class="full-x">
+                <p id="operData3">数据加载中…</p>
+            </div>
+        </div>
+        <div class="part4 absolute part">
+            <div class="img_box">
+                <img src="../statics/img/part4.png" class="full-x">
+                <p>
+                    <label ><span id="operDataDay"></span><span style="font-size: .36rem; font-weight: bold">天</span></label><label ><span id="operDataTime"></span><span style="font-size: .36rem; font-weight: bold">小时</span></label>
+                </p>
+            </div>
+        </div>
+        <div class="part5 absolute part">
+            <div class="img_box">
+                <img src="../statics/img/part5.png" class="full-x">
+                <p id="operData5">数据加载中…</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">理财有风险 投资需谨慎</div>
+</div>
+<script type="text/javascript" src="../statics/js/app/jquery.countup.min.js"></script>
+<script type="text/javascript" src="../statics/js/app/jquery.waypoints.min.js"></script>
+<script type="text/javascript" src="../statics/js/app/data.js"></script>
+<!--/coolie-->
+</body>
+</html>

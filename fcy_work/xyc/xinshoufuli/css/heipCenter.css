@@ -1,0 +1,96 @@
+/*安全保障*/
+.top-bac img{
+    width: 100%;
+}
+.sec-title{
+    font-size: 18px;
+    text-align: center;
+    margin: 35px auto 22px;
+    color: #333;
+}
+.sec-icon{
+    text-align: center;
+}
+.sec-icon img{
+    display: inline-block;
+    width: 66px;
+    height: 66px;
+}
+.sec-content{
+    padding: 17px 18px 25px;
+    font-size: 14px;
+    color: #666;
+    line-height: 26px;
+    border-bottom: 1px solid rgb(231,231,231);
+}
+/*了解我们*/
+.ab-part{
+    padding: 20px 17px;
+    border-bottom: 1px solid rgb(231,231,231);
+}
+.ab-part:last-child{
+    border: 0;
+}
+.ab-icon{
+    width: 20px;
+    display: inline-block;
+}
+.ab-title{
+    font-size: 16px;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    margin:0 0 15px 11px;
+    color: #333;
+}
+.ab-content{
+    font-size: 14px;
+    line-height: 26px;
+    margin: 10px auto 0;
+    color: #666;
+}
+.ab-part3 .ab-part3-content li{
+    height: 145px;
+}
+.ab-part3 .ab-part3-content li span{
+    display: block;
+    height: 100%;
+    float: left;
+}
+.ab-part3 .ab-part3-content li img{
+    display: inline-block;
+    width: 60px;
+    margin-top: 44px;
+}
+.ab-part3 .ab-part3-content li>div{
+    font-size: 16px;
+    color: #333;
+    margin: 30px auto 16px;
+}
+.ab-part3 .ab-part3-content li p{
+    color: #666;
+    font-size: 14px;
+}
+.b-r-d{
+    border-right: 1px dotted #cacaca;
+}
+.b-b-d{
+    border-bottom:1px dotted #cacaca ;
+}
+.p-t-10{
+    padding-top: 10px;
+}
+.ab-part4-content li{
+    width: 25%;
+    float: left;
+    text-align: center;
+}
+.ab-part4-content li img{
+    display: inline-block;
+    width: 90%;
+}
+/*新手指引*/
+.content img{
+    width: 100%;
+    display: block;
+}
