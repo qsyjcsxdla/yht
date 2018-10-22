@@ -1,0 +1,189 @@
+<!DOCTYPE>
+<!--suppress ALL -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="robots" content="none"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport" id="viewport">
+    <title>关于我们</title>
+    <script src="../Skins/js/jquery.1.11.1.js" type="text/javascript"></script>
+    <script src="../Skins/js/underscore-min.js" type="text/javascript"></script>
+    <script src="../Skins/js/resolve.js" type="text/javascript"></script>
+    <script src="../Skins/js/fc.js" type="text/javascript"></script>
+    <style type="text/css">
+        button,
+        html input[type=button],
+        input[type=reset],
+        input[type=submit] {
+            -webkit-appearance: button;
+            cursor: pointer
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            color: #333333;
+        }
+
+        *:before, *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            line-height: 1;
+            background: #ffffff;
+            position: relative;
+            height: 100%;
+        }
+
+        html {
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            height: 100%;
+        }
+
+        .all {
+            max-width: 7.5rem;
+            min-width: 3.2rem;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .alert-bg {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, .5);
+            display: none;
+        }
+        .errBox {
+            position: absolute;
+            width: 100%;
+            top: 42%;
+            text-align: center;
+            z-index: 2000;
+        }
+        #errMsg {
+            background-color: rgba(0,0,0,.7);
+            /*display: none;*/
+            margin: auto;
+            font-size: .28rem;
+            line-height: .68rem;
+            height: .68rem;
+            color: #fff;
+            width: 73.3%;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="isApp" value=""/>
+<input type="hidden" id="userId" value=""/>
+<input type="hidden" id="clientType" value=""/>
+<div class="all">
+    <textarea style="width: 4rem; height: 2rem; border: 1px solid #333; margin: 0 1.74rem; " id="subMission1">
+    </textarea>
+    <div class="" id="btnn" style="width: 1rem; height: .5rem; background: red;color: #fff; font-size: .36rem; line-height: .36rem; text-align: center; margin: .2rem auto" >提交</div>
+</div>
+<div class="alert-bg "></div>
+<div class="errBox">
+    <div id="errMsg" style="display: none"></div>
+</div>
+<script>
+    //封装接口
+    $.extend({
+        ajaxJson: function (o) {
+            o.url = o.url || '';
+            o.type = o.type || "post";
+            o.dataType = o.dataType || "json";
+            o.async = o.async || true;
+            o.contentType = o.contentType || "application/json; charset=UTF-8";
+            //o.data = JSON.stringify($.extend({}, o.data, {clientType: "wechat", clientVersion: ""}));
+            o.data = JSON.stringify(o.data);
+            $.ajax(o);
+        }
+    });
+
+    var userInfo = {isApp: "",userId: "", clientType: ""};
+    function getUrlparam() {
+        return '?user_id=' + $('#userId').val() + '&is_app=' + $('#isApp').val() + '&clientType=' + iphoneType;
+    }
+    function callIos(o){
+        userInfo.userId = o;
+    }
+    function callAndroid(o) {
+        userInfo.userId = o;
+        alert(o)
+    }
+    /*function getUrlparam() {
+        return '?userId=' + $('#userId').val() + '&tag=' + $('#tag').val() + '&tokenId=' + $('#tokenId').val() + '&clientType=' + $('#clientType').val() + '&clientVersion=' + $('#clientVersion').val();
+    }*/
+
+    $(function(){
+        $("#isApp").val(getQueryValue('is_app'));
+        $("#userId").val(getQueryValue('user_id'));
+        $("#clientType").val(iphoneType);
+        userInfo = {
+            isApp: $("#isApp").val(),
+            userId: $("#userId").val(),
+            clientType: $("#clientType").val()
+        };
+        console.log(userInfo.isApp,userInfo.userId,userInfo.clientType)
+    })
+
+
+    //功能性
+    $("#btnn").click(function () {
+        if(userInfo.isApp == 1){
+            if (userInfo.userId == "") {
+                alert('还没登录呢，快去登录吧')
+                // goLogin();
+                if($("#clientType").val()=='android'){
+                    alert('根据参数要走安卓手机通道啦')
+                    /*document.location="http://" + location.host + location.pathname;*/
+                    document.location = "js://login";
+                }else if($("#clientType").val()=='ios'){
+                    alert('根据参数要走苹果手机通道啦')
+                    try {
+                        window.webkit.messageHandlers.login.postMessage('')
+                    }catch(error){
+                        console.log(error.message)
+                    }
+                }
+
+            } else {
+                alert('登录啦，往下走啦')
+                //sendKey();
+                if ($("#subMission1").val().trim()==null||$("#subMission1").val().trim()==undefined||$("#subMission1").val().trim()==''){
+                    $("#errMsg").html("反馈意见还没输入哦");
+                    delayOut()
+                    return false;
+                }else{
+                    alert('这里要向后台发起请求啦')
+                    console.log('调取用后台啦')
+                }
+            }
+        }else {
+            if($("#clientType").val()=='android'){
+                alert('走安卓')
+            }else if($("#clientType").val()=='ios'){
+                alert('走苹果')
+            }else{
+                alert('看着办吧')
+            }
+        }
+    });
+</script>
+</body>
+</html>

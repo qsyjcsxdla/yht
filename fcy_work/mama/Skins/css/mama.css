@@ -1,0 +1,203 @@
+button,
+html input[type=button],
+input[type=reset],
+input[type=submit] {
+    -webkit-appearance: button;
+    cursor: pointer
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+*:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    line-height: 1;
+    position: relative;
+    height: 100%;
+}
+.all {
+    max-width: 7.5rem;
+    min-width: 3.2rem;
+    width: 100%;
+    margin: 0 auto;
+    background: #f3f3f3;
+}
+.basic_box{
+    background-color: white;
+    height: .86rem;
+    position: relative;
+    width: 100%;
+}
+.basic_box1{
+    background-color: white;
+    position: relative;
+    width: 100%;
+}
+.form-group1:after{
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 94%;
+    height: 1px;
+    margin-left: 3%;
+    border-top: 1px solid #d9d9d9;
+    color: #d9d9d9;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+}
+.label_t{
+    font-size: .28rem;
+    padding-left: .3rem;
+    line-height: .86rem;
+}
+.input_c{
+    font-size: .28rem;
+    height: .86rem;
+    border: 0px;
+    width: 74%;
+    line-height: .86rem;
+}
+.input_c1{
+    font-size: .28rem;
+    height: .86rem;
+    border: 0px;
+    width: 74%;
+    padding-left: 1.7rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select {
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background: url("../img/arrow.png") no-repeat scroll right center transparent;
+    padding-right: .3rem;
+    padding-left: .85rem;
+    background-size: .16rem;
+    direction: rtl;
+}
+
+label{
+    font-size: .28rem;
+}
+
+html {
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    height: 100%;
+}
+
+
+.yu_box{
+    height: .86rem;
+    position: relative;
+    width: 60%;
+    margin: .1rem auto;
+    padding-top: .3rem;
+}
+.input_s{
+    font-size: .28rem;
+    height: .86rem;
+    border: 0px;
+    width: 88%;
+    padding-left: .85rem;
+}
+
+
+input[type="radio"] {
+    margin: 3px 3px 0px 5px;
+    display: none;
+}
+
+.label1 {
+    padding-left: .4rem;
+    cursor: pointer;
+    background: url("../img/sel_un.png") no-repeat left center;
+    background-size: .28rem;
+}
+.label1.checked {
+    background: url("../img/sel_on.png") no-repeat left center;
+    background-size: .28rem;
+    color:#1578D8
+}
+
+.xian_box{
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+}
+.xian{
+    width: 92%;
+    margin: 0 auto;
+    height: 1px;
+    background: #eee;
+}
+.message_big_box{
+    width: 100%;
+    background: #fff
+}
+.message_box{
+    width: 100%;
+    text-indent: .35rem;
+    font-size: .28rem;
+    color: #333;
+    line-height: .28rem;
+    padding: .35rem 0 .2rem 0;
+}
+.message{
+    outline:none;
+    width: 91%;
+    height: 1.85rem;
+    background: #fff;
+    margin: 0 4.5%;
+    border: none;
+    font-size: .26rem;
+    line-height: .36rem;
+    color: #666;
+}
+.btn_sure{
+    margin: .8rem .29rem 0;
+    background: #FF5D78;
+    font-size: .3rem;
+    color: #fff;
+    text-align: center;
+    height: .9rem;
+    line-height: .9rem;
+    width: 6.92rem;
+    border-radius: .45rem;
+    border: none;
+}

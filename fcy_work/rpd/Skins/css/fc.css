@@ -1,0 +1,284 @@
+@charset "utf-8";
+button,
+html input[type=button],
+input[type=reset],
+input[type=submit] {
+    -webkit-appearance: button;
+    cursor: pointer
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+*:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+*:focus {outline: none;}
+body {
+    line-height: 1;
+    background: #fff;
+    position: relative;
+    height: 100%;
+}
+html {
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    height: 100%;
+}
+
+img{
+    border:0 none
+}
+*{
+    margin:0;
+    padding:0;
+   /* font-family:"Microsoft YaHei",Arial,Verdana,Helvetica,sans-serif;*/
+}
+a{
+    text-decoration:none;
+    outline:none;
+}
+q:before,q:after{
+    content:'';
+}
+address,cite,dfn,em,var{
+    font-style:normal;
+}
+table{
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+ul,ol{
+    list-style:none;
+}
+li{
+    list-style-type:none;
+}
+textarea,input{
+    word-wrap:break-word;
+    word-break:break-all;
+    padding:0;
+}
+body{
+    color:#000;
+    font-family:"Microsoft YaHei",Arial,Verdana,Helvetica,sans-serif;
+    width:100%;
+}
+label{
+    font-size: .28rem;
+}
+/*input小眼睛位置*/
+.you_b{
+    position:absolute;
+    right: .3rem;
+    width: .6rem;
+    height: .5rem;
+    top:.25rem;
+}
+.biyan{
+    background: url('../img/bi.png') no-repeat center center;
+    background-size: .32rem;
+}
+
+.kaiyan{
+    background: url('../img/kai.png') no-repeat center center;
+    background-size: .32rem
+}
+
+/*input关闭*/
+.close_btn1{
+    position:absolute;
+    right: .3rem;
+    width: .6rem;
+    height: .5rem;
+    top:.25rem;
+    background: url("../img/close.png") no-repeat center center;
+    background-size: .32rem;
+    display: none;
+}
+.close_btn2{
+    position:absolute;
+    right: .9rem;
+    width: .6rem;
+    height: .5rem;
+    top:.25rem;
+    background: url("../img/close.png") no-repeat center center;
+    background-size: .32rem;
+    display: none;
+}
+.close_btn3{
+    position:absolute;
+    right: 2.48rem;
+    width: .6rem;
+    height: .5rem;
+    top:.25rem;
+    background: url("../img/close.png") no-repeat center center;
+    background-size: .32rem;
+    display: none;
+}
+.close_btn4{
+    position:absolute;
+    right: 1.82rem;
+    width: .6rem;
+    height: .5rem;
+    top:.25rem;
+    background: url("../img/close.png") no-repeat center center;
+    background-size: .32rem;
+    display: none;
+}
+/*通条inout内样式文件*/
+.input_s{
+    font-size: .28rem;
+    height: 1rem;
+    border: 0px;
+    width: 88%;
+    padding-left: .85rem;
+    letter-spacing: .02rem;
+}
+
+/*类似吐司错误弹框*/
+.errBox {
+    position: absolute;
+    width: 100%;
+    top: 42%;
+    text-align: center;
+    z-index: 2000;
+}
+#errMsg {
+    background-color: rgba(0,0,0,.7);
+    /*display: none;*/
+    margin: auto;
+    font-size: .28rem;
+    line-height: .68rem;
+    height: .68rem;
+    color: #fff;
+    width: 73.3%;
+    word-wrap: break-word;
+}
+
+/*弹框背景及弹框样式*/
+.alert-bg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .5);
+    display: none;
+}
+.alert {
+    overflow: hidden;
+    color: #333333;
+    font-size: .28rem;
+    line-height: .3rem;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 1001;
+    border-radius: .2rem;
+    width:5.4rem ;
+    background: #fff;
+    height:3.16rem;
+    margin-top: -1.58rem;
+    margin-left: -2.7rem;
+}
+
+
+/*input前的小图标*/
+.pic1_img{
+    background: url("../img/p_1.png") no-repeat 0.33rem center;
+    background-size: .32rem;
+}
+.pic2_img{
+    background: url("../img/p_2.png") no-repeat 0.33rem center;
+    background-size: .32rem;
+}
+.pic3_img{
+    background: url("../img/p_3.png") no-repeat 0.33rem center;
+    background-size: .32rem;
+}
+
+/*线条80%以上*/
+.xian_box{
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+}
+.xian{
+    width: 92%;
+    margin: 0 auto;
+    height: 1px;
+    background: #eee;
+}
+
+/*长条按钮*/
+.btn_sure{
+    margin: .6rem 0.3rem 0;
+    font-size: .34rem;
+    text-align: center;
+    height: 1rem;
+    line-height:1rem;
+    width: 6.9rem;
+    border-radius: .1rem;
+    letter-spacing: .15rem;
+    border: none;
+    color: #fff;
+}
+.btn_unact{
+    background: #CACACA;
+}
+.btn_act{
+    background: #517CC6;
+}
+
+/*底部*/
+.part_last{
+    width: 100%;
+    position: fixed;
+    bottom: .6rem;
+    text-align: center;
+    font-size: .28rem;
+    color: #cacaca;
+}
+
+/*公用类*/
+.bold{
+    font-weight:bold;
+}
+.underline-none{
+    text-decoration:none;
+}
+.underline{
+    text-decoration:underline;
+}
+.hide{
+    display:none;
+}
+.show{
+    display:block;
+}
+.fixed{
+    position:fixed;
+}
+.absolute{
+    position:absolute;
+}
+.relative{
+    position:relative;
+}
+.static{
+    position:static;
+}
+.border-none{
+    border:0 none;
+}
+.hidden{
+    overflow:hidden;
+}

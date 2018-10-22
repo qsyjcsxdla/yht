@@ -1,0 +1,545 @@
+<html class="pixel-ratio-2 retina ios ios-9 ios-9-1 ios-gt-8 ios-gt-7 ios-gt-6" data-dpr="2" style="font-size: 50px;"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>分期信息</title>
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/0.4.0/weui.min.css">
+    <link rel="stylesheet" href="http://yimeifq.cfxyc.cn:80/yht-api-weChat/resources/css/common.css">
+    <link rel="stylesheet" href="http://yimeifq.cfxyc.cn:80/yht-api-weChat/resources/css/ymfq.css">
+</head>
+<body ontouchstart="" style="font-size: 0.24rem;">
+<div class="info_banner" id="first">
+    <img src="http://yimeifq.cfxyc.cn:80/yht-api-weChat/resources/images/banner@3x.png" alt="">
+</div>
+<div class="weui_cells weui_cells_form info_cells_form fq_cells_form">
+    <div class="weui_cell" id="showActionSheet">
+        <div class="weui_cell_hd">整形项目</div>
+        <div class="weui_cell_bd weui_cell_primary" id="projectShow" style="text-align: right;">
+            请选择
+        </div>
+    </div>
+    <div class="weui_cell">
+        <div class="weui_cell_hd">
+            <label class="weui_label">所在门店</label>
+        </div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input id="szmd" class="weui_input placeholder-color" type="text" placeholder="" value="" disabled="disabled">
+        </div>
+    </div>
+    <div class="weui_cell">
+        <div class="weui_cell_hd">
+            <label class="weui_label">分期金额</label>
+        </div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="number" pattern="[0-9]*" placeholder="请填写分期金额" id="fqje" value="">
+        </div>
+    </div>
+    <div class="weui_cell weui_cell_select weui_select_after">
+        <div class="weui_cell_hd">分期期数</div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <select class="weui_select" name="select2" id="loan" value="">
+                <option value="">请选择</option>
+
+
+
+
+                <option value="3">3个月</option>
+
+
+
+
+
+
+                <option value="6">6个月</option>
+
+
+
+
+
+
+                <option value="9">9个月</option>
+
+
+
+
+
+
+                <option value="12">12个月</option>
+
+
+
+            </select>
+        </div>
+    </div>
+</div>
+<div class="fq_tip">手术知情同意书</div>
+<ul class="fq_load fn-clear">
+    <li class="fl" id="upPic" style="display: none;">
+        <img src="http://yimeifq.cfxyc.cn:80/yht-api-weChat/resources/images/picture@3x.png" alt="" id="downPic" onclick="viewPic(this);">
+        <img src="http://yimeifq.cfxyc.cn:80/yht-api-weChat/resources/images/close1.png" class="fq_close" alt="" onclick="deletePic();">
+    </li>
+    <li class="fl camera" id="showModel"><img src="http://yimeifq.cfxyc.cn:80/yht-api-weChat/resources/images/camera@3x.png" alt=""></li>
+</ul>
+<!--<div class="weui_cells_tips" style="text-align: right;"><a href="javascript:;" style="color: #666666" onclick="viewRepaymentSchedule();">还款计算器</a></div><br>-->
+<br>
+<p class="info_btn fq_btn"><a href="#next" class="weui_btn weui_btn_danger" onclick="verifyCustAttach();">确认申请</a></p>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <header class="modal-header">
+            <h4>手术知情同意书</h4>
+        </header>
+        <div class="modal-body">
+            <div class="modal-body-inner">
+                <img src="http://yimeifq.cfxyc.cn:80/yht-api-weChat/resources/images/shili@3x.png" class="fq_sl" alt="" id="operationPic">
+                <p><img src="http://yimeifq.cfxyc.cn:80/yht-api-weChat/resources/images/ht@3x.png" alt=""></p>
+                <div><img src="http://yimeifq.cfxyc.cn:80/yht-api-weChat/resources/images/tip.png" alt=""><span>温馨提示：必须为本人手术知情同意书，真实有效，且内容清晰可辨。</span></div>
+            </div>
+        </div>
+        <footer class="modal-footer">
+            <span>上传照片</span>
+            <input class="weui_uploader_input weui_btn weui_btn_warn" type="button" value="上传照片" multiple="" onclick="uploadPic();">
+        </footer>
+    </div>
+</div>
+
+<div id="zxxm_select_warp">
+    <div class="weui_mask_transition" id="mask_zxxm"></div>
+    <div class="weui_actionsheet" id="weui_actionsheet_zxxm">
+        <div class="weui_actionsheet_menu">
+            <div class="weui_cells weui_cells_checkbox">
+
+                <label class="weui_cell weui_check_label" for="1">
+                    <div class="weui_cell_hd">
+                        <p>玻尿酸(脸部)</p>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input type="checkbox" class="weui_check" name="projectCheckBox" id="1" value="玻尿酸(脸部)">
+                        <i class="weui_icon_checked" style="float: right;"></i>
+                    </div>
+                </label>
+
+                <label class="weui_cell weui_check_label" for="2">
+                    <div class="weui_cell_hd">
+                        <p>瘦脸</p>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input type="checkbox" class="weui_check" name="projectCheckBox" id="2" value="瘦脸">
+                        <i class="weui_icon_checked" style="float: right;"></i>
+                    </div>
+                </label>
+
+                <label class="weui_cell weui_check_label" for="3">
+                    <div class="weui_cell_hd">
+                        <p>玻尿酸(下巴)</p>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input type="checkbox" class="weui_check" name="projectCheckBox" id="3" value="玻尿酸(下巴)">
+                        <i class="weui_icon_checked" style="float: right;"></i>
+                    </div>
+                </label>
+
+                <label class="weui_cell weui_check_label" for="4">
+                    <div class="weui_cell_hd">
+                        <p>脂肪填充</p>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input type="checkbox" class="weui_check" name="projectCheckBox" id="4" value="脂肪填充">
+                        <i class="weui_icon_checked" style="float: right;"></i>
+                    </div>
+                </label>
+
+                <label class="weui_cell weui_check_label" for="5">
+                    <div class="weui_cell_hd">
+                        <p>鼻部整形</p>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input type="checkbox" class="weui_check" name="projectCheckBox" id="5" value="鼻部整形">
+                        <i class="weui_icon_checked" style="float: right;"></i>
+                    </div>
+                </label>
+
+                <label class="weui_cell weui_check_label" for="6">
+                    <div class="weui_cell_hd">
+                        <p>唇</p>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input type="checkbox" class="weui_check" name="projectCheckBox" id="6" value="唇">
+                        <i class="weui_icon_checked" style="float: right;"></i>
+                    </div>
+                </label>
+
+                <label class="weui_cell weui_check_label" for="7">
+                    <div class="weui_cell_hd">
+                        <p>眼部整形</p>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input type="checkbox" class="weui_check" name="projectCheckBox" id="7" value="眼部整形">
+                        <i class="weui_icon_checked" style="float: right;"></i>
+                    </div>
+                </label>
+
+                <label class="weui_cell weui_check_label" for="8">
+                    <div class="weui_cell_hd">
+                        <p>臀部整形</p>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input type="checkbox" class="weui_check" name="projectCheckBox" id="8" value="臀部整形">
+                        <i class="weui_icon_checked" style="float: right;"></i>
+                    </div>
+                </label>
+
+                <label class="weui_cell weui_check_label" for="9">
+                    <div class="weui_cell_hd">
+                        <p>抽脂</p>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input type="checkbox" class="weui_check" name="projectCheckBox" id="9" value="抽脂">
+                        <i class="weui_icon_checked" style="float: right;"></i>
+                    </div>
+                </label>
+
+            </div>
+        </div>
+        <div class="weui_actionsheet_action">
+            <div class="weui_actionsheet_cell" id="actionsheet_confirm_zxm">确定</div>
+            <div class="weui_actionsheet_cell" id="actionsheet_cancel_zxm">取消</div>
+        </div>
+    </div>
+</div>
+
+<div id="next"></div>
+<input type="hidden" name="openId" id="openId" value="oT0GU05Gy_a0wy_pAIyAjX9wuqhY">
+<input type="hidden" name="projectIds" id="projectIds" value="">
+<input type="hidden" name="mCustId" id="mCustId" value="">
+<input type="hidden" name="mediaId" id="mediaId" value="">
+<input type="hidden" name="url" id="medUrl" value="">
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="http://yimeifq.cfxyc.cn:80/yht-api-weChat/resources/js/jquery-2.1.0.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script src="http://yimeifq.cfxyc.cn:80/yht-api-weChat/resources/js/autoScale.js"></script>
+<script>
+    $(function(){
+        //初始化
+        var url = location.href.split('#')[0];
+        $.ajax({
+            type:'post',
+            url:'http://yimeifq.cfxyc.cn:80/yht-api-weChat/wxJSSDKVerify/getJSApiInfo.do',
+            dataType:'JSON',
+            data:{
+                url:url
+            },
+            success:function(data){
+                if(data) {
+                    if (data.isSuccess) {
+                        wx.config({
+                            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                            appId: data.appId, // 必填，公众号的唯一标识
+                            timestamp: data.timestamp, // 必填，生成签名的时间戳
+                            nonceStr: data.nonceStr, // 必填，生成签名的随机串
+                            signature: data.signature,// 必填，签名，见附录1
+                            jsApiList: ['chooseImage', 'uploadImage' , 'downloadImage', 'getLocalImgData', 'previewImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                        });
+                    }
+                }
+            }
+        });
+
+        //整形项目选择器初始化
+        var po = $("#projectIds").val();
+        if (po.length != 0) {
+            var proj = $.parseJSON('');
+            var ids = $("#projectIds").val(proj);
+            if (ids.length != 0) {
+                $(function(){
+                    var $pro  = $('input[name=projectCheckBox]');
+                    var projectShow = '';
+                    $.each($pro ,function(k ,v){
+                        $.each(proj , function(index,value){
+                            if($(v).attr('id')==value){
+                                $(v).prop('checked',true);
+                                var proValue = $(v).val() + ",";
+                                projectShow += proValue;
+                            };
+                        });
+                    });
+                    if (projectShow.length > 18) {
+                        projectShow = projectShow.substring(0,18)+"...";
+                    } else {
+                        projectShow = projectShow.substring(0, projectShow.length-1);
+                    }
+                    $("#projectShow").html(projectShow);
+                });
+            }
+        }
+
+
+        $('#showActionSheet').click(function() {
+            var mask = $('#mask_zxxm');
+            var weuiActionsheet = $('#weui_actionsheet_zxxm');
+            weuiActionsheet.addClass('weui_actionsheet_toggle');
+            mask.show().addClass('weui_fade_toggle').click(function() {
+                hideActionSheet(weuiActionsheet, mask);
+            });
+            //取消
+            $('#actionsheet_cancel_zxm').click(function() {
+                hideActionSheet(weuiActionsheet, mask);
+            });
+            //确定
+            $('#actionsheet_confirm_zxm').click(function() {
+                hideActionSheet(weuiActionsheet, mask);
+                var idgs = [];
+                var guarantyIds = [];
+                var guaranty = $('input[name=projectCheckBox]:checked');
+                //console.info(guaranty.length);
+                $.each(guaranty,function(index,value){
+                    guarantyIds.push($(this).attr("id"));
+                    idgs.push($(value).val());
+                });
+                var projects = "";
+                var ymProducts = "";
+                for(var i=0;i<guarantyIds.length;i++) {
+                    projects = guarantyIds[i]+",";
+                    ymProducts += projects;
+                }
+                ymProducts = ymProducts.substring(0,ymProducts.length-1);
+                $("#projectIds").val(ymProducts);
+                var projectShow = "";
+                var projectString = "";
+                for (var i=0;i<idgs.length;i++) {
+                    projectString = idgs[i]+",";
+                    projectShow += projectString;
+                }
+
+                projectShow=projectShow.substring(0,projectShow.length-1);
+                if (projectShow.length >18) {
+                    projectShow = projectShow.substring(0,18)+"...";
+                }
+                $('#projectShow').html(projectShow);
+
+            });
+            weuiActionsheet.unbind('transitionend').unbind('webkitTransitionEnd');
+
+            function hideActionSheet(weuiActionsheet, mask) {
+                weuiActionsheet.removeClass('weui_actionsheet_toggle');
+                mask.removeClass('weui_fade_toggle');
+                weuiActionsheet.on('transitionend', function() {
+                    mask.hide();
+                }).on('webkitTransitionEnd',
+                    function() {
+                        mask.hide();
+                    })
+            }
+        });
+
+        //上传图片控件初始化
+        $('#upPic').hide();
+        var btn = document.getElementById('showModel');
+        var modal = document.getElementById('modal');
+        btn.addEventListener('click', function(){
+            modal.style.display = "block";
+        });
+        modal.addEventListener('click', function(){
+            if( $(event.target).is('#modal')) {
+                event.preventDefault();
+                modal.style.display = "none";
+            }
+        });
+
+        //获取用户手术知情同意书附件
+        getCustAttach();
+    })
+
+
+    //调用微信接口,上传图片
+    function uploadPic() {
+        wx.chooseImage({
+            count: 1, // 默认9
+            sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res) {
+                var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                wx.uploadImage({
+                    localId: localIds.toString(), // 需要上传的图片的本地ID，由chooseImage接口获得
+                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                    success: function (res) {
+                        var mediaId = res.serverId; // 返回图片的服务器端ID，即mediaId
+                        $("#mediaId").val(mediaId);
+                        //将获取到的 mediaId 传入后台 方法savePicture
+                        var modal = document.getElementById('modal');
+                        modal.style.display = "none";
+                        wx.downloadImage({
+                            serverId: mediaId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
+                            isShowProgressTips: 1, // 默认为1，显示进度提示
+                            success: function (res) {
+                                var localId = res.localId; // 返回图片下载后的本地ID
+                                wx.getLocalImgData({
+                                    localId: localId, // 图片的localID
+                                    success: function (res) {
+                                        $('#upPic').show();
+                                        var localData = res.localData; // localData是图片的base64数据，可以用img标签显示
+                                        uploadBaseImg(localData);
+                                    }
+                                });
+                            }
+                        });
+
+                    },
+                    fail: function (res) {
+                        alert('上传图片失败，请重试');
+                    }
+                });
+            }
+        });
+    }
+
+    //上传图片到本地静态库
+    function uploadBaseImg(imgBase64){
+        var custId = $("#openId").val();
+        $.ajax({
+            type:'post',
+            url:'http://yimeifq.cfxyc.cn:80/yht-api-weChat/wxCustAttach/saveCustPic.do',
+            dataType:'JSON',
+            data:{
+                imgBase64:imgBase64,
+                custId:custId,
+                corporationId:'01001',
+                attachType:'53'
+            },
+            success:function(data){
+                if(data) {
+                    if (data.success) {
+                        getCustAttach();
+                    }
+                }
+            }
+        });
+    }
+
+    //预览图片信息
+    function viewPic(obj) {
+        var element = document.getElementById('downPic');
+        wx.previewImage({
+            current: element.src, // 当前显示图片的http链接
+            urls: [element.src] // 需要预览的图片http链接列表
+        });
+    }
+
+    //删除图片信息
+    function deletePic () {
+        var openId = $("#openId").val();
+        $.ajax({
+            type:'post',
+            url:'http://yimeifq.cfxyc.cn:80/yht-api-weChat/wxCustAttach/deleteAttach.do',
+            dataType:'JSON',
+            data:{
+                openId:openId,
+                attachType:'53'
+            },
+            success:function(data){
+                if(data) {
+                    if (data.success) {
+                        $('#showModel').show();
+                        $('#upPic').hide();
+                        $("#mediaId").val("");
+                        alert(data.msg);
+                    } else {
+                        alert(data.msg);
+                    }
+
+                }
+            }
+        });
+    }
+
+    //获取客户手术知情意见书附件
+    function getCustAttach() {
+        var openId = $("#openId").val();
+        var certNo =null;
+        $.ajax({
+            type:'post',
+            url:'http://yimeifq.cfxyc.cn:80/yht-api-weChat/wxCustAttach/getMedicalAttach.do',
+            dataType:'JSON',
+            data:{
+                openId:openId,
+                attachType:'53',
+                certNo:certNo
+            },
+            success:function(data){
+                if(data) {
+                    if (!data.success) {
+                        $('#upPic').hide();
+                        $('#showModel').show();
+                        $('#mediaId').val();
+                    } else {
+                        $('#upPic').show();
+                        $('#showModel').hide();
+                        var element = document.getElementById('downPic');
+                        element.src = data.url;
+                    }
+                }
+            }
+        });
+    }
+
+    //验证是否上传手术知情同意书
+    function verifyCustAttach (){
+        var openId = $("#openId").val();
+        $.ajax({
+            type:'post',
+            url:'http://yimeifq.cfxyc.cn:80/yht-api-weChat/wxCustAttach/verifyCustAttachIsUpload.do',
+            dataType:'JSON',
+            data:{
+                openId:openId,
+                attachType:'53'
+            },
+            success:function(data){
+                if(data) {
+                    if (data.success) {
+                        if (data.isExist) {
+                            saveApplyInfo();
+                        } else {
+                            alert("请上传手术知情同意书");
+                            return false;
+                        }
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            }
+        });
+    }
+
+    //保存申请信息
+    function saveApplyInfo() {
+        var openId = $("#openId").val();
+        var projects = $("#projectIds").val();
+        var fqjeAmount = $("#fqje").val();
+        var periods = $("#loan").val();
+        $.ajax({
+            type:'post',
+            url:'http://yimeifq.cfxyc.cn:80/yht-api-weChat/ymProgressRecord/saveApplyInfo.do',
+            dataType:'JSON',
+            data:{
+                openId:openId,
+                projectId:projects,
+                applyAmount:fqjeAmount,
+                periods:periods
+            },
+            success:function(data){
+                if(data) {
+                    if (data.success) {
+                        if (data.isExistPl) {
+                            alert(data.msg);
+                        } else {
+                            window.location.href="http://yimeifq.cfxyc.cn:80/yht-api-weChat/wxCust/goCustInfoView.do?openId="+openId;
+                        }
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            }
+        });
+    }
+</script>
+
+</body></html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>webupload上传身份证正面和反面</title>
+    <link href="../Skins/css/common.css" rel="stylesheet">
+    <link href="../Skins/css/mama.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Skins/css/wui.css"/>
+    <script src="../Skins/js/jquery-1.11.3.js" type="text/javascript"></script>
+    <script src="../Skins/js/underscore-min.js" type="text/javascript"></script>
+    <script src="../Skins/js/resolve.js" type="text/javascript"></script>
+    <script src="../Skins/js/fc.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        .demo{margin:70px auto}
+        a{cursor: pointer}
+        .btn:hover{background-color: #e95a00;text-decoration: none}
+        ul,li{list-style: none;padding:0;margin:0}
+        .clearfix:after{visibility:hidden; display:block; font-size:0; content:" "; clear:both; height:0}
+        *:first-child+html .clearfix{zoom:1}
+        /*******进度条样式*********/
+        .progress{position:relative;padding: 1px; border-radius:3px; margin:40px 0 0 0;}
+        .bar {background-color: green; display:block; width:0%; height:20px; border-radius:3px; }
+        .percent{position:absolute; height:20px; display:inline-block;top:3px; left:2%; color:#fff }
+        /********webupload******/
+
+        .fileinput-button {
+            position: relative;
+            overflow: hidden;
+            height: 100px;
+            text-align: center;
+            width: 47%;
+           /* background: url("images/plus.png") no-repeat scroll center center;*/
+            padding: 0;
+            border:1px dotted #000;
+            float:left
+        }
+        .fileinput-button input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+        .img_common {
+            max-height: 100%;
+            max-width: 100%;
+            text-align: center;
+        }
+        .cover_words{ display: inline-block;padding: 74px 0 0;}
+        /********webupload over******/
+    </style>
+</head>
+<body>
+<div class="demo">
+    <div class="upload-image-list clearfix">
+        <div class="fileinput-button js-add-image" id="front">
+            <span class="cover_words">正面</span>
+            <div class="webuploader-pick">
+                <a class="fileinput-button-icon" href="javascript:;"></a>
+            </div>
+        </div>
+        <div class="fileinput-button js-add-image" id="back" style="float:right">
+            <span class="cover_words">反面</span>
+            <div class="webuploader-pick">
+                <a class="fileinput-button-icon" href="javascript:;"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        webupload_pic('front');
+        webupload_pic('back');
+    })
+
+    function webupload_pic(id) {
+        var maxsize = 5000;
+        $.getScript("./webuploader.js", function() {
+            if (!WebUploader.Uploader.support()) {
+                alert('您的浏览器不支持上传功能！如果你使用的是IE浏览器，请尝试升级 flash 播放器');
+            }
+            var target_id = '#'+id;
+            var uploader = WebUploader.create({
+                multiple: false,
+                auto: true,
+                swf: "./Public/js/plugins/webuploader/Uploader.swf",
+                server: "ajax.php",
+                pick: {
+                    id: target_id,
+                    innerHTML: ''
+                },
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,png',
+                    mimeTypes: 'image/*'
+                },
+                fileSingleSizeLimit: maxsize * 1024 * 1024,
+                duplicate: true,
+                formData: {
+                    code: 'identity',
+                }
+
+            });
+            //上传时
+            uploader.on('fileQueued', function(file) {
+                var item_progress = "<div class='progress' id='" + file['id'] + "'><span class='bar'></span><span class='percent'>0%</span></div></li>";
+                $(".webupload_current").prepend(item_progress);
+
+            });
+            //上传中
+            uploader.on('uploadProgress', function(file, percentage) {
+                var percent = parseFloat(percentage * 100);
+                $("#" + file.id).find('.bar').css({"width": percent + "%"});
+                $("#" + file.id).find(".percent").text(percent + "%");
+
+            });
+
+            uploader.on('uploadBeforeSend', function(block, data) {
+                data.maxsize = maxsize;
+            });
+            //上传成功后
+            uploader.on('uploadSuccess', function(file, response) {
+                $(target_id).find(".img_common").remove();
+                $(target_id).prepend("<img class='img_common' src=" + "./" + response.pic + " data-pic=" + response.pic + " alt='身份证照片'/>")
+            });
+
+            uploader.on('uploadError', function(file, reason) {
+                alert("上传失败！请重试。");
+            });
+        });
+    }
+
+</script>
+</body>
+</html>

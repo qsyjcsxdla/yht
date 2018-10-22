@@ -1,0 +1,333 @@
+<!DOCTYPE>
+<!--suppress ALL -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="robots" content="none"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport" id="viewport">
+    <title>意见反馈</title>
+    <script src="../Skins/js/jquery.1.11.1.js" type="text/javascript"></script>
+    <script src="../Skins/js/underscore-min.js" type="text/javascript"></script>
+    <script src="../Skins/js/resolve.js" type="text/javascript"></script>
+    <script src="../Skins/js/fc.js" type="text/javascript"></script>
+    <script src="../Skins/js/clienttype.js" type="text/javascript"></script>
+    <style type="text/css">
+        button,
+        html input[type=button],
+        input[type=reset],
+        input[type=submit] {
+            -webkit-appearance: button;
+            cursor: pointer
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            color: #333333;
+        }
+
+        *:before, *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            line-height: 1;
+            background: #ffffff;
+            position: relative;
+            height: 100%;
+        }
+
+        html {
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            height: 100%;
+        }
+
+        .all {
+            max-width: 7.5rem;
+            min-width: 3.2rem;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .message_big_box{
+            width: 100%;
+            background: #fff
+        }
+        .message_box{
+            width: 100%;
+            text-indent: .35rem;
+            font-size: .28rem;
+            color: #333;
+            line-height: .28rem;
+            padding: .35rem 0 .2rem 0;
+        }
+        .message{
+            display: block;
+            -webkit-appearance: none;
+            padding: .05rem;
+            width: 91%;
+            height: 2.85rem;
+            background: #fff;
+            margin: .4rem 4.5% 0;
+            border: none;
+            font-size: .26rem;
+            line-height: .36rem;
+            color: #333;
+            border: 1px solid #CACACA;
+        }
+        .text_shuo{
+            font-size: .2rem;
+            color: #999;
+            width: 88%;
+            margin: .2rem auto;
+            text-align: right;
+        }
+        .btn_sure{
+            margin: .6rem 4.5% 0;
+            background: #EA4D44;
+            font-size: .33rem;
+            color: #fff;
+            text-align: center;
+            height: .76rem;
+            line-height: .76rem;
+            width: 91%;
+            border:1px solid #eee;
+            font-size: .29rem;
+
+        }
+        .errBox {
+            position: absolute;
+            width: 100%;
+            top: 42%;
+            text-align: center;
+            z-index: 2000;
+        }
+        #errMsg {
+            background-color: rgba(0,0,0,.7);
+            /*display: none;*/
+            margin: auto;
+            font-size: .28rem;
+            line-height: .68rem;
+            height: .68rem;
+            color: #fff;
+            width: 73.3%;
+            word-wrap: break-word;
+        }
+        .alert-bg {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, .5);
+            display: none;
+        }
+        .alert {
+            overflow: hidden;
+            color: #333333;
+            font-size: .28rem;
+            line-height: .3rem;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            z-index: 1001;
+            border-radius: .2rem;
+            width:5.4rem ;
+            background: #fff;
+            height:3.16rem;
+            margin-top: -1.58rem;
+            margin-left: -2.7rem;
+        }
+        .content_box{
+            height: 2.26rem;
+            border-bottom: 1px solid #CACACA;
+        }
+        .content_body{
+            display: block;
+            color: #666;
+            font-size: .28rem;
+            width: 80%;
+            line-height: 2.26rem;
+            margin: 0 auto;
+            text-align:center;
+        }
+        .content_footer{
+            color: #EA4D44;
+            font-size: .32rem;
+            height: .9rem;
+            line-height: .9rem;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .footer_l{
+            width: 2.68rem;
+            text-align: center;
+            float: left;
+            color:#333;
+        }
+        .footer_c{
+            width: 1px;
+            height: .9rem;
+            background: #CACACA;
+            float: left;
+            color:#333;
+
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="userId" value="">
+<input type="hidden" id="clientType" value="">
+<input type="hidden" id="headUrl" value="">
+    <div class="all">
+        <div class="form-group mt-20 " >
+            <div style="width: 100%; background: #fff" class="message_big_box ">
+                <textarea class="message" maxlength="200"   placeholder="感谢你对信义仓的支持，我们期待您的宝贵意见！" ></textarea>
+            </div>
+            <div  class="text_shuo">最多还可输入<span id="liuyan" style="color: #EA4D44">200</span>字</div>
+        </div>
+        <div class="btn-group">
+            <input type="reset" style="display:none;" >
+            <button class="btn_sure" id="submit_btn" type="button">发送</button>
+        </div>
+    </div>
+    <div class="alert-bg"></div>
+    <div class="errBox">
+        <div id="errMsg" style="display: none"></div>
+    </div>
+<script>
+    var userInfo = {userId:'',clientType:'',headUrl:''}
+        $(function () {
+        $("#userId").val(getQueryValue('user_id'));
+        $("#clientType").val(iphoneType);
+        $('#headUrl').val(headUrl());
+        userInfo = {
+            userId:$("#userId").val(),
+            clientType:$("#clientType").val(),
+            headUrl:$("#headUrl").val(),
+        }
+    })
+
+    $("#submit_btn").click(function(){
+        $('#submit_btn').attr('disabled','disabled')
+        if ($(".message").val()==null||$(".message").val()==undefined||$(".message").val()==''){
+            $("#errMsg").html("反馈意见还没输入哦");
+            delayOut();
+            $('#submit_btn').removeAttr('disabled','disabled')
+            return false;
+        }else{
+            var message = $(".message").val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            var o = {
+                userId:$("#userId").val(),
+                feedback_content:message,
+                sysCode:"web"
+            }
+            sendRequest(JSON.stringify(mkrequestForOpeData(iphoneType,systime,'FEED_BACK',o)));
+        }
+    })
+
+    function sendRequest(content) {
+        $.ajax({
+            type : "get",
+            contentType : "application/jsonp; charset=utf-8",
+            url : userInfo.headUrl+"/wxtapp/handle",
+            data : {
+                "BSData" : content
+            },
+            async:false,
+            dataType : 'jsonp',
+            jsonp : "jsonpCallback",
+            jsonpCallback : "callbackFun",
+            success : function (data) {
+                var data = data.head;
+                if(data.resultcode == 000000){
+                    $('.alert-bg').show();
+                    alertbox(data.resultcode);
+                    $('#btn_y').click(function(){
+                        $('.alert-bg').hide();
+                        $('.alert').remove();
+                        $('.message').val('');
+                        $('#liuyan').html('200');
+                        $('#submit_btn').removeAttr('disabled','disabled')
+                    })
+                }else {
+                    $('.alert-bg').show();
+                    alertbox(data.resultcode,data.resultmsg);
+                    $('#btn_n').click(function(){
+                        $('.alert-bg').hide();
+                        $('.alert').remove();
+                        $('#submit_btn').removeAttr('disabled','disabled')
+                    })
+                    $('#btn_a').click(function(){
+                        $('.alert-bg').hide();
+                        $('.alert').remove();
+                        $('.message').val('');
+                        $('.message').focus();
+                        $('#liuyan').html('200');
+                        $('#submit_btn').removeAttr('disabled','disabled')
+                    })
+                }
+
+            }
+        });
+    }
+
+    //提交的信息
+    function mkrequestForOpeData(iphoneType,systime,bizcode ,o) {
+        return {
+            "head" : {
+                "device" : iphoneType ||'',
+                "token" : "",
+                "type" : "REQUEST",
+                "gmt_created" :systime,
+                "bizcode" : bizcode
+            },
+            "body" : o,
+        };
+    }
+
+    function alertbox(a,o){
+        var alertbox= '';
+        alertbox = '<div class="alert" >';
+        alertbox += '<div class="content_box" >';
+        if(a == 000000){
+            alertbox += '<span class=" content_body" >感谢您的反馈，我们会认真处理！</span>';
+            alertbox += '</div>';
+            alertbox += '<div class="content_footer " id="btn_y" >好的</div>';
+        }else{
+            alertbox += '<span class="content_body" >';
+            alertbox += o;
+            alertbox += '</span></div>';
+            alertbox += '<div class="content_footer">';
+            alertbox += '<div class="footer_l " id="btn_a">重新输入</div>';
+            alertbox += '<div class="footer_c "></div>';
+            alertbox += '<div class="footer_l " id="btn_n">取消</div>';
+            alertbox += '</div>';
+        }
+        alertbox += '</div>';
+        $('body').append(alertbox)
+    }
+
+    var bind_name = 'input';
+    if (navigator.userAgent.indexOf("MSIE") != -1){
+        bind_name = 'propertychange';
+    }
+    $('.message').bind(bind_name, function(){
+        var Len = 200-$('.message').val().length;
+        $('#liuyan').html(Len < 0 ? 0 : Len);
+    })
+
+</script>
+</body>
+</html>

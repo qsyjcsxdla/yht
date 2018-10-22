@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="robots" content="none"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport" id="viewport">
+    <title>芝麻信用分授权结果</title>
+    <script src="../Skins/js/jquery-1.11.3.js" type="text/javascript"></script>
+    <script src="../Skins/js/underscore-min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        (function () {
+            // deicePixelRatio ：设备像素
+            var scale = 1 / devicePixelRatio;
+            //设置meta 压缩界面 模拟设备的高分辨率
+            //document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+            //debounce 为节流函数，自己实现。或者引入underscoure即可。
+            var reSize = _.debounce(function () {
+                //        var deviceWidth = document.documentElement.clientWidth > 1300 ? 1300 : document.documentElement.clientWidth;
+                var deviceWidth = document.documentElement.clientWidth > 750 ? 750 : document.documentElement.clientWidth;
+                //按照640像素下字体为100px的标准来，得到一个字体缩放比例值 6.4
+                document.documentElement.style.fontSize = (deviceWidth / 7.5) + 'px';
+            }, 50);
+
+            window.onresize = reSize;
+
+            reSize();
+
+        })();
+    </script>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: -webkit-linear-gradient(to bottom, #108af5, #27bbf6);
+            background: -moz-linear-gradient(to bottom, #108af5, #27bbf6);
+            background: -o-linear-gradient(to bottom, #108af5, #27bbf6);
+            background: -ms-linear-gradient(to bottom, #108af5, #27bbf6);
+            background: linear-gradient(to bottom, #108af5, #27bbf6);
+        }
+        .all {
+            max-width: 7.5rem;
+            min-width: 3.2rem;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: .6rem;
+            font-size: .24rem;
+        }
+        .loan_p{
+            width: 100%;
+            padding: 3rem 0 6.5rem;
+            font-size: .4rem;
+            text-align: center;
+            line-height: 1.5;
+            color: #fff;
+        }
+        .btn_sure{
+            margin: .6rem 2rem 0;
+            width: 3.5rem;
+        }
+        .btn_sure{
+            margin: .6rem 2rem 0;
+            width: 3.5rem;
+            font-size: .34rem;
+            text-align: center;
+            height: 1rem;
+            line-height:1rem;
+            border-radius: .1rem;
+            letter-spacing: .05rem;
+            border: none;
+            color: #fff;
+        }
+        .btn_act{
+            background: #02c68f;
+        }
+        .hide{
+            display: none;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="all">
+    <div class="" style="width: 70%; margin: 1rem  auto"><img src="../Skins/img/xin.png" style="width: 100%"></div>
+    <div class="result1 hide result loan_p" >
+        芝麻信用分授权成功！
+        <a class="btn_sure btn_act" id="submit_btn" type="button" style="display: block;text-decoration: none" href="alipays://platformapi/startapp?appId=20000067&url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3Fscope%3Dauth_zhima%26app_id%3D2018061760384551%26redirect_uri%3Dhttp%253A%252F%252Fzmxy.dfxkdata.com%252Fagent%253Fuuid%253D83c094ad103d2b42e894065a741cbb0c%2526url%253DaHR0cHM6Ly9hcGl0cy5kZnhrZGF0YS5jb20vY2FsbGJhY2svZGlyZWN0L2Zyb250">查看信用分</a>
+    </div>
+    <div class="result2 result hide loan_p">
+        芝麻信用分授权失败！
+        <div style="font-size: .28rem; padding-top: .5rem;color: #F1F0F5">页面将于 <span id="secs" style="color: #d43f3a"></span> 秒后跳转</div>
+    </div>
+
+</div>
+</body>
+<script>
+    $(function(){
+        forResult();
+    })
+    function forResult(){
+        $.ajax({
+            ContentType: 'application/json',
+            url :"http://yunwei.5iyht.com:7300/mock/5b84afed0174354e395b1dd7",
+            data:{},
+            success:function (json) {
+                var data = json.data;
+                var success =  data.success;
+                if(success == '1'){ //申请成功
+                    $('.result1').show();
+                }else if(success == '2'){  //申请失败
+                    $('.result2').show();
+                    showTime();
+                }else{
+                    console.log('出错了，请找管理员')
+                }
+            },
+            error:function () {
+                console.log(json.msg)
+            }
+        })
+    }
+    var t = 10;
+    function showTime(){
+        t -= 1;
+        document.getElementById("secs").innerHTML= t;
+        if(t==0){
+            location.href='http://www.baidu.com';
+        }
+        setTimeout("showTime()",1000);
+    }
+
+</script>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="robots" content="none"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport" id="viewport">
+    <title>立即申请</title>
+    <link href="../Skins/css/common.css" rel="stylesheet">
+    <link href="../Skins/css/mama.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Skins/css/wui.css"/>
+    <script src="../Skins/js/jquery-1.11.3.js" type="text/javascript"></script>
+    <script src="../Skins/js/underscore-min.js" type="text/javascript"></script>
+    <script src="../Skins/js/resolve.js" type="text/javascript"></script>
+    <script src="../Skins/js/fc.js" type="text/javascript"></script>
+    <style>
+        .myCheck + label{
+            padding-left: 3%;
+            padding-right: 4.8rem;
+            cursor: pointer;
+            background: url("../Skins/img/sel_un.png") no-repeat right center;
+            background-size: 5%;
+            font-size: .3rem;
+        }
+        .myCheck:checked + label{
+            padding-left: 3%;
+            padding-right: 4.8rem;
+            background: url("../Skins/img/sel_on.png") no-repeat right center;
+            background-size: 5%;
+            color:#1578D8;
+            font-size: .3rem;
+        }
+        .check_label{
+            display: inline-block;
+            width: 2.2rem;
+        }
+        .errBox {
+            position: absolute;
+            width: 100%;
+            top: 42%;
+            text-align: center;
+            z-index: 2000;
+        }
+        #errMsg {
+            background-color: rgba(0,0,0,.7);
+            /*display: none;*/
+            margin: auto;
+            font-size: .28rem;
+            line-height: .68rem;
+            height: .68rem;
+            color: #fff;
+            width: 73.3%;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<div class="all relative">
+    <img src="../Skins/img/li_banner.png" style="width: 100%">
+    <form action="" id="yu_form">
+        <div class="form-group basic_box form-group1 mt-20" id="qixian">
+            <div class="label_t hidden" style="width: 100%">
+                <div class="float-left">整形项目</div>
+                <div class="float-left input_c"  style="text-align: right" id="zxxmname">请选择</div>
+                <input type="hidden" value="" id="zxxmval">
+                <img src="../Skins/img/arrow.png" class="float-left ml-5 " style="width: .16rem; display: block; margin: .3rem 0 0 .14rem ">
+            </div>
+        </div>
+        <div class="form-group basic_box form-group1" >
+           <!-- <div class="label_t hidden hide" style="width: 100%">
+                <div class="float-left">所在门店</div>
+                <div class="float-left input_c" id="szmd2"  style="text-align: right">请选择</div>
+                <img src="../Skins/img/arrow.png" class="float-left ml-5 " style="width: .16rem; display: block; margin: .3rem 0 0 .14rem ">
+            </div>-->
+            <label for="szmd" class="label_t"  >所在门店
+                <select id="szmd" class="input_c1" dir="rtl"  >
+                    <option value ="0">请选择</option>
+                    <option value ="1">5万以内</option>
+                    <option value ="2">5-15万</option>
+                    <option value="3">15-30万</option>
+                    <option value="4">30-50万</option>
+                    <option value="5">50万以上</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group basic_box form-group1" >
+            <!--<label for="fqje" class="label_t ">分期金额
+                <input class="input_c1" type="number" style="text-align: right" id="fqje">
+            </label>-->
+            <div class="label_t hidden" style="width: 100%">
+                <label for="fqje">
+                    <div class="float-left">分期金额</div>
+                        <input class="float-left input_c show" type="number" pattern="[0-9]*"   style="text-align: right" id="fqje">
+                    <div  class="float-left ml-5 " style="width: .28rem; display: block; font-size: .28rem; line-height: .86rem">元</div>
+                </label>
+            </div>
+            <!--<label for="fqje" class="label_t hide" >分期金额
+                <select id="fqje" class="input_c1" dir="rtl" >
+                    <option value ="0">请选择</option>
+                    <option value ="1">5万以内</option>
+                    <option value ="2">5-15万</option>
+                    <option value="3">15-30万</option>
+                    <option value="4">30-50万</option>
+                    <option value="5">50万以上</option>
+                </select>
+            </label>-->
+        </div>
+        <div class="form-group basic_box form-group1" >
+            <label for="fqqs" class="label_t">分期期数
+                <select id="fqqs" class="input_c1" dir="rtl">
+                    <option value ="0">请选择</option>
+                    <option value ="1">5万以内</option>
+                    <option value ="2">5-15万</option>
+                    <option value="3">15-30万</option>
+                    <option value="4">30-50万</option>
+                    <option value="5">50万以上</option>
+                </select>
+            </label>
+        </div>
+        <div style="text-align: right;  font-size: .24rem; padding: 0 .3rem; background: #fff;height: .6rem; line-height: .6rem">
+            <div class="float-right animated swing">还款计算器</div>
+        </div>
+        <div class="form-group basic_box1 " >
+            <div class="weui-cell__bd">
+                <div class="weui-uploader">
+                    <div class="weui-uploader__hd">
+                        <p class="weui-uploader__title">手术知情同意书</p>
+                    </div>
+                    <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files" id="uploaderFiles">
+                            <li class="weui-uploader__file" style="background-image:url('../Skins/img/li_banner.png')"></li>
+                        </ul>
+                        <div class="weui-uploader__input-box">
+                            <input id="uploaderInput" class="weui-uploader__input" name="photo[]" type="file" accept="image/*" multiple/>
+                        </div>
+                    </div>
+                    <div class="f-18 c-999 pr-30" style="text-align: right">温馨提示:必须为本人手术知情同意书，真实有效，且内容清晰可辨</div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="btn-group" style="background: #fff">
+            <!--<input type="reset" style="display:none;" >-->
+            <button class="btn_sure" id="submit_btn" >确认申请</button>
+        </div>
+    </form>
+    <div class="alert-bg hide" id="alert_bg"></div>
+    <div class="errBox">
+        <div id="errMsg" style="display: none"></div>
+    </div>
+    <div class="weui_actionsheet  " id="weui_actionsheet_zxxm">
+        <div class="weui_actionsheet_menu">
+            <div class="weui_cells weui_cells_checkbox">
+                <div class="weui_cells_label ">
+                    <input type="checkbox" id="1" class="myCheck hide"  name="projectCheckBox" value="玻尿酸（脸部）">
+                    <label for="1" ><span class="check_label">玻尿酸（脸部）</span></label>
+                </div>
+                <div class="weui_cells_label">
+                    <input type="checkbox" id="2" class="myCheck hide" name="projectCheckBox" value="瘦脸">
+                    <label for="2"  ><span class="check_label">瘦脸</span></label>
+                </div>
+                <div class="weui_cells_label">
+                    <input type="checkbox" id="3" class="myCheck hide" name="projectCheckBox" value="玻尿酸（下巴）">
+                    <label for="3"  ><span  class="check_label">玻尿酸（下巴）</span></label>
+                </div>
+                <div class="weui_cells_label">
+                    <input type="checkbox" id="4" class="myCheck hide" name="projectCheckBox" value="脂肪填充">
+                    <label for="4"  ><span  class="check_label">脂肪填充</span></label>
+                </div>
+                <div class="weui_cells_label">
+                    <input type="checkbox" id="5" class="myCheck hide" name="projectCheckBox" value="鼻部整形">
+                    <label for="5"  ><span  class="check_label">鼻部整形</span></label>
+                </div>
+                <div class="weui_cells_label">
+                    <input type="checkbox" id="6" class="myCheck hide" name="projectCheckBox" value="唇">
+                    <label for="6"  ><span  class="check_label">唇</span></label>
+                </div>
+                <div class="weui_cells_label">
+                    <input type="checkbox" id="7" class="myCheck hide" name="projectCheckBox" value="眼部整形">
+                    <label for="7"  ><span  class="check_label">眼部整形</span></label>
+                </div>
+                <div class="weui_cells_label">
+                    <input type="checkbox" id="8" class="myCheck hide" name="projectCheckBox" value="臀部整形">
+                    <label for="8"  ><span  class="check_label">臀部整形</span></label>
+                </div>
+                <div class="weui_cells_label">
+                    <input type="checkbox" id="9" class="myCheck hide" name="projectCheckBox" value="抽脂">
+                    <label for="9"  ><span  class="check_label">抽脂</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="weui_actionsheet_action">
+            <div class="weui_actionsheet_cell" id="actionsheet_confirm_zxm">确定</div>
+            <div class="weui_actionsheet_cell" id="actionsheet_cancel_zxm">取消</div>
+        </div>
+    </div>
+    <div class="weui-gallery" id="gallery">
+        <span class="weui-gallery__img" id="galleryImg"></span>
+        <div class="weui-gallery__opr">
+            <a href="javascript:" class="weui-gallery__del">
+                <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        /*整形项目选择*/
+        var $weui_actionsheet_zxxm = $('#weui_actionsheet_zxxm');
+        var $alert_bg = $('#alert_bg');
+        function hideActionSheet() {
+            $weui_actionsheet_zxxm.removeClass('weui-actionsheet_toggle');
+            $alert_bg.fadeOut(200);
+        }
+
+        $alert_bg.on('click', hideActionSheet);
+        $('#actionsheet_cancel_zxm').on('click', hideActionSheet);
+        $('#actionsheet_confirm_zxm').click(function(){
+            var idgs = [];
+            var guarantyIds = [];
+            var guaranty = $('input[name=projectCheckBox]:checked');
+            //console.info(guaranty.length);
+            $.each(guaranty,function(index,value){
+                guarantyIds.push($(this).attr("id"));
+                idgs.push($(this).val());
+            });
+            guarantyIds = guarantyIds.join(',');
+            idgs = idgs.join(',');
+            if(idgs.length > 18){
+                idgs = idgs.substring(0,18) +'…'
+            }
+            $('#zxxmname').text(idgs);
+            $('#zxxmval').val(guarantyIds)
+            hideActionSheet();
+        })
+        $("#qixian").on("click", function(){
+            $weui_actionsheet_zxxm.addClass('weui-actionsheet_toggle');
+            $alert_bg.fadeIn(200);
+        });
+
+        /*图片上传*/
+        var tmpl ;
+            $gallery = $("#gallery"),
+            $galleryImg = $("#galleryImg"),
+            $uploaderInput = $("#uploaderInput"),//点击上传按钮
+            $uploaderFiles = $("#uploaderFiles");//ul标签
+        $uploaderInput.on("change", function(e){
+            var src,srcid, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+            for (var i = 0, len = files.length; i < len; ++i) {
+                var file = files[i];
+                if (url) {
+                    src = url.createObjectURL(file);
+                } else {
+                    src = e.target.result;
+                }
+                srcid=src.substring(src.length-4)
+                tmpl = '<li class="weui-uploader__file" style="background-image:url('+src+')" data-src="'+src+'" id="pic'+srcid+'"></li>',
+                $uploaderFiles.append($(tmpl));
+            }
+        });
+        $uploaderFiles.on("click", "li", function(){
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+        });
+        $gallery.on("click", function(){
+            $gallery.fadeOut(100);
+        });
+    });
+
+    $('#submit_btn').click(function () {
+        if (!validate_required($("#zxxmval"), "请选择整形项目")) return false;
+        if($('#szmd').val()=='0'){
+            $("#errMsg").html("请选择所在门店");
+            delayOut();
+            return false;
+        }
+        if (!validate_required($("#fqje"), "请输入分期金额")) return false;
+        if($('#fqqs').val()=='0'){
+            $("#errMsg").html("请选择分期期数");
+            delayOut();
+            return false;
+        }
+        var pic =$('#uploaderFiles').find('li');
+        if(pic.length<1){
+            $("#errMsg").html("上传手术知情书");
+            delayOut();
+            return false;
+        }else{
+            window.open('http://www.baidu.com')
+        }
+        
+    });
+    function sendRequest(){
+        $('#submit_btn').attr('disabled','disabled')
+        $.ajax({
+            type : "get",
+            contentType : "application/jsonp; charset=utf-8",
+            url : url+"wxtapp-qb/handle",
+            data : {
+                "BSData" : content
+            },
+            async:false,
+            dataType : 'jsonp',
+            jsonp : "jsonpCallback",
+            jsonpCallback : "callbackFun",
+            success : function (data) {
+                var json = data.head;
+                $("input[type=reset]").trigger("click");
+                $('#label1').removeAttr('class').attr({'class': 'label1 label2'});
+                $('#label2').removeAttr('class').attr({'class': 'label1 label3'});
+                if(json.resultcode == '000000'){
+                    $('.alert-bg').show();
+                    alertbox(1);
+                    $('#btn_y').click(function(){
+                        $('.alert-bg').hide();
+                        $('.alert').remove();
+                        $('#submit_btn').removeAttr('disabled','disabled')
+                    })
+                }else{
+                    $('.alert-bg').show();
+                    alertbox(0);
+                    $('#btn_n').click(function(){
+                        $('.alert-bg').hide();
+                        $('.alert').remove();
+                        $('#submit_btn').removeAttr('disabled','disabled')
+                    })
+                    $('#btn_a').click(function(){
+                        $('.alert-bg').hide();
+                        $('.alert').remove();
+                        $('#name').focus();
+                        $('#submit_btn').removeAttr('disabled','disabled')
+                    })
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

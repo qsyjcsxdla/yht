@@ -1,0 +1,168 @@
+<!DOCTYPE>
+<!--suppress ALL -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="robots" content="none"/>
+    <meta name="format-detection" content="telephone=yes, email=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport" id="viewport">
+    <title>联系我们</title>
+    <script src="../Skins/js/jquery.1.11.1.js" type="text/javascript"></script>
+    <script src="../Skins/js/underscore-min.js" type="text/javascript"></script>
+    <script src="../Skins/js/clipboard.min.js"  type="text/javascript"></script>
+    <script src="../Skins/js/resolve.js" type="text/javascript"></script>
+    <script src="../Skins/js/fc.js" type="text/javascript"></script>
+    <script src="../Skins/js/clienttype.js" type="text/javascript"></script>
+    <style type="text/css">
+        button,
+        html input[type=button],
+        input[type=reset],
+        input[type=submit] {
+            -webkit-appearance: button;
+            cursor: pointer
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            color: #333333;
+        }
+
+        *:before, *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            line-height: 1;
+            background: #f3f3f3;
+            position: relative;
+            height: 100%;
+        }
+
+        html {
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            height: 100%;
+        }
+
+        .all {
+            max-width: 7.5rem;
+            min-width: 3.2rem;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .img_box{
+            width: 2.9rem;
+            height: 1.18rem;
+            margin: .98rem auto;
+        }
+        .contain_text{
+            font-size: .26rem;
+            color: #333;
+            text-indent: .48rem;
+            width: 6.8rem;
+            margin: .7rem auto .7rem;
+            line-height: 1.5;
+            text-align:justify;
+            text-justify:inter-ideograph;
+        }
+        .alert_box{
+            width: 100%;
+            height: 2.624rem;
+            border: 1px solid #CACACA;
+            background: #fff;
+        }
+
+        .alert_m{
+            height: .868rem;
+            font-size: .24rem;
+            display: block;
+            color: #666;
+            line-height:.868rem;
+            text-indent: .8rem;
+            text-decoration: none;
+            position: relative;
+            cursor: pointer;
+        }
+        .under_line{
+            border-bottom: 1px solid #CACACA;
+        }
+        .pic_img{
+            position: absolute;
+            width: .36rem;
+            height: .36rem;
+            left: .29rem;
+            top:.24rem;
+        }
+        .arrow_img{
+            display: block;
+            position: absolute;
+            width: .12rem;
+            height: .26rem;
+            right: .46rem;
+            top:.3rem
+        }
+        .errBox {
+            position: absolute;
+            width: 100%;
+            top: 42%;
+            text-align: center;
+            z-index: 2000;
+        }
+        #errMsg {
+            background-color: rgba(0,0,0,.7);
+            /*display: none;*/
+            margin: auto;
+            font-size: .28rem;
+            line-height: .68rem;
+            height: .68rem;
+            color: #fff;
+            width: 73.3%;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="clientType" value=""/>
+<div class="all">
+    <div class="img_box" ><img src="../Skins/img/aboutUs/logo_xyc.png" style="width: 100%"></div>
+    <div class="alert_box">
+        <a class="alert_m under_line" href="tel:4008855678"><img src="../Skins/img/aboutUs/Phone.png" class="pic_img"></img>客服电话：400-885-5678<img src="../Skins/img/aboutUs/arrow.png" class="arrow_img"></a>
+        <a class="alert_m under_line btn"  ><img src="../Skins/img/aboutUs/QQ.png" class="pic_img">客服微信号：<span id="yhtxyc">yhtxyc</span><img src="../Skins/img/aboutUs/arrow.png" class="arrow_img"></a>
+        <!--<a class="alert_m under_line btn"   data-clipboard-text="信义仓理财群"><img src="../Skins/img/aboutUs/weixin.png" class="pic_img">微信咨询群：信义仓理财群<img src="../Skins/img/aboutUs/arrow.png" class="arrow_img"></a>-->
+        <div class="alert_m " id="goBrowser" onclick="toBrowser('http://www.cfxyc.com/wxt/home/LoadHome.action?pageSize=6')"><img src="../Skins/img/aboutUs/wangzhi.png" class="pic_img">网站地址：www.cfxyc.com<img src="../Skins/img/aboutUs/arrow.png" class="arrow_img"></div>
+    </div>
+</div>
+<div class="errBox">
+    <div id="errMsg" style="display: none"></div>
+</div>
+<script>
+    $(function(){
+        $("#clientType").val(iphoneType);
+    })
+
+    var clipboard = new Clipboard('.btn', {
+        target: function() { return document.getElementById('yhtxyc');}
+    });
+
+    clipboard.on('success', function(e) {
+        $("#errMsg").html(e.text+'  复制成功');
+        delayOut()
+    });
+
+    clipboard.on('error', function(e) {
+        $("#errMsg").html('请选择“拷贝”进行复制!');
+        delayOut()
+    });
+
+</script>
+</body>
+</html>
