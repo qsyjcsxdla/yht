@@ -29,7 +29,8 @@ var myDate = new Date();
 var systime = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-'
     + myDate.getDate() + ' ' + myDate.getHours() + ':'
     + myDate.getMinutes() + ':' + myDate.getSeconds();
-var url = "http://www.cfxyc.com.cn/";// 定义测试环境变量
+var url = "61.164.59.232:8087/" // 定义测试环境变量
+/*var url = "http://www.cfxyc.com.cn/";// 定义正式环境变量*/
 function sendRequest(content, fun) {
     $.ajax({
         type : "GET",
